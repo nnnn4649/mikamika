@@ -12,8 +12,8 @@ from django.utils import timezone
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class MikamikaCreateView(CreateView):
-    template_name = 'mikamika_create.html'
+class FaView(CreateView):
+    template_name = 'fa.html'
     form_class = MikamikaForm
     success_url = reverse_lazy('mikamika:mikamika_create_complete')
 

@@ -5,9 +5,8 @@ from .models import Mikamika
 class MikamikaForm(forms.ModelForm):
     class Meta:
         model = Mikamika
-        fields = ('date', 'title', 'text',)
+        fields = ('store', 'bikou','good','soso')
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'form-control'}),
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'text': forms.TextInput(attrs={'class': 'form-control'}),
+            'store': forms.TextInput(attrs={'class': 'form-control'}),
+            'bikou': forms.TextInput(attrs={'class': 'form-control'}),
         }
