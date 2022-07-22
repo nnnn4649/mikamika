@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>評価の投稿</title>
+    <title>good評価の投稿</title>
 </head>
 <body>
+{% for mikamika in mikamika_list %}
+<p>
+    {{ mikamika.store }}
+</p>
+{% endfor %}
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="checkbox" name="soso" value="0">so-so
-    <input type="checkbox" name="good" value="1">good
-    <button type="submit">評価</button>
+    <button type="submit">送信</button>
 </form>
 
 </body>

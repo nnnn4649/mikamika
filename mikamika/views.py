@@ -15,6 +15,8 @@ class IndexView(TemplateView):
 class FaView(CreateView):
     template_name = 'fa.html'
     form_class = MikamikaForm
+    model = Mikamika
+    store = Mikamika.objects.filter(hyouka='good')
     success_url = reverse_lazy('mikamika:mikamika_create_complete')
 
 class MikamikaCreateCompleteView(TemplateView):
