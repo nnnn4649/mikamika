@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-{% for mikamika in mikamika_list %}
 <p>
     {{ mikamika.date }}
     <a href="{% url 'mikamika:mikamika_detail' mikamika.pk %}">{{ mikamika.title }}</a>

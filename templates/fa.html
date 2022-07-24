@@ -5,11 +5,16 @@
     <title>good評価の投稿</title>
 </head>
 <body>
-{% for mikamika in mikamika_list %}
-<p>
-    {{ mikamika.store }}
-</p>
-{% endfor %}
+
+<h1>good店の表示</h1>
+
+<p>goodの店は{{ store_list }}</p>
+
+{% for store in store_list %}
+    <div>
+      <p>{{ store }}:{{ store.bikou }}:{{ store.hyouka}}</p>
+    </div>
+  {% endfor %}
 
 <form method="post">
     {% csrf_token %}
