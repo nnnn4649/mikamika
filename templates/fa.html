@@ -8,19 +8,16 @@
 
 <h1>good店の表示</h1>
 
-<p>goodの店は{{ store_list }}</p>
+<p>sosoの店は、{{ sostore }} です</p>
+<p>上記店をsosoされた方は下記店をgoodされています。
+</p>
 
-{% for store in store_list %}
-    <div>
-      <p>{{ store }}:{{ store.bikou }}:{{ store.hyouka}}</p>
-    </div>
-  {% endfor %}
+<p>goodの店は、{{ gstore }} です</p>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">送信</button>
-</form>
+<p>上記店は行かれたことがありますか？</p>
+<p>行かれたことがなければ、ぜひ一度行ってみてはいかがでしょうか</p>
+<p>行ったことがありましたら、評価はいかがでしたでしょうか？</p>
 
+<h2>評価</h2>
 </body>
 </html>

@@ -14,17 +14,19 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
 class FaView(CreateView):
+      template_name = 'fa.html'
+      form_class = MikamikaForm
+      model = Mikamika
+      success_url = reverse_lazy('mikamika:mikamika_create_complete')
+
+def mikamika_create(request):
     template_name = 'fa.html'
-    form_class = MikamikaForm
-    model = Mikamika
-
-    def mikamika_create(request):
-      store = Mikamika.objects.filter(hyouka='0').order_by('created_at').first()
-      store_list = Mikamika.objects.all()
-      return render(request, 'fa.html', {'store_list':store_list})
-    success_url = reverse_lazy('mikamika:mikamika_create_complete')
+    sostore = Mikamika.objects.filter(hyouka='0').order_by('created_at').first()
+    gstore = Mikamika.objects.filter(hyouka='1').order_by('created_at').first()
+    context = {'sostore' : sostore,
+               'gstore' : gstore,}
+    return render(request, template_name , context)
     
-
 class MikamikaCreateCompleteView(TemplateView):
     template_name = 'mikamika_create_complete.html'
 
