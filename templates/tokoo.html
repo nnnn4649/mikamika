@@ -6,6 +6,10 @@
 </head>
 <body>
 
+{% if user.is_authenticated %}
+{{ user.get_username }}さんログイン中
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

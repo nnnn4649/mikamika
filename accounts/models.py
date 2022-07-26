@@ -44,7 +44,7 @@ class CustomUserManager(UserManager):
 
         return self._create_user(email, username, password, **extra_fields)
         
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser): 
     objects = CustomUserManager()
 
     def __str__(self):

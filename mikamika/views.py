@@ -9,20 +9,28 @@ from .forms import MikamikaForm
 from .models import Mikamika
 from django.utils import timezone
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class FaView(CreateView):
-      template_name = 'fa.html'
+class FaView(LoginRequiredMixin, CreateView):
+      template_name = 'tokoo.html'
+      login_url = '/account/login/'
       form_class = MikamikaForm
       model = Mikamika
       success_url = reverse_lazy('mikamika:mikamika_create_complete')
 
+      def form_valid(self, form):
+          mikamika =  form.save(commit=False)
+          mikamika.create_user=self.request.user
+          mikamika.save()
+          return super().form_valid(form)
+
 def mikamika_create(request):
     template_name = 'fa.html'
-    sostore = Mikamika.objects.filter(hyouka='0').order_by('created_at').first()
-    gstore = Mikamika.objects.filter(hyouka='1').order_by('created_at').first()
+    sostore = Mikamika.objects.filter(hyouka='0',hyouka='1').order_by('created_at').first()
+    gstore  = Mikamika.objects.filter(hyouka='1').order_by('created_at').first()
     context = {'sostore' : sostore,
                'gstore' : gstore,}
     return render(request, template_name , context)
@@ -54,3 +62,4 @@ class MikamikaDeleteView(DeleteView):
     template_name = 'mikamika_delete.html'
     model = Mikamika
     success_url = reverse_lazy('mikamika:mikamika_list')
+
