@@ -29,8 +29,8 @@ class FaView(LoginRequiredMixin, CreateView):
 
 def mikamika_create(request):
     template_name = 'fa.html'
-    sostore = Mikamika.objects.filter(hyouka='0',hyouka='1').order_by('created_at').first()
-    gstore  = Mikamika.objects.filter(hyouka='1').order_by('created_at').first()
+    sostore = Mikamika.objects.filter(hyouka='0').filter(hyouka='1').order_by('?').first()
+    gstore  = Mikamika.objects.filter(hyouka='1').order_by('?').first()
     context = {'sostore' : sostore,
                'gstore' : gstore,}
     return render(request, template_name , context)

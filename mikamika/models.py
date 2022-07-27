@@ -3,8 +3,6 @@ from django.db import models
 from django.utils import timezone
 import uuid
 
- 
-
 HYOUKA_CHOICES = [
         ('0','soso'),
         ('1','good'),
@@ -17,7 +15,7 @@ TODOU_CHOICES = [
 
 class Mikamika(models.Model):   
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    create_user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default=1)
+    create_user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default=1,)
     date = models.DateField(verbose_name='日付', default=timezone.now)
     store = models.CharField(verbose_name='店名', max_length=40,default='')
     bikou = models.CharField(verbose_name='一言', max_length=20 , null=True, blank=True,)
@@ -26,5 +24,6 @@ class Mikamika(models.Model):
     created_at = models.DateTimeField(verbose_name='作成日時', default=timezone.now)
     updated_at = models.DateTimeField(verbose_name='編集日時', blank=True, null=True)
 
+
     def __str__(self):
-         return self.create_user
+         return self.store
