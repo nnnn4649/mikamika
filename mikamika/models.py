@@ -15,7 +15,7 @@ TODOU_CHOICES = [
 
 class Mikamika(models.Model):   
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    create_user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default=1,)
+    create_user = models.ForeignKey(get_user_model(),on_delete=models.CASCADE,default='',)
     date = models.DateField(verbose_name='日付', default=timezone.now)
     store = models.CharField(verbose_name='店名', max_length=40,default='')
     bikou = models.CharField(verbose_name='一言', max_length=20 , null=True, blank=True,)
@@ -26,4 +26,4 @@ class Mikamika(models.Model):
 
 
     def __str__(self):
-         return self.store
+         return self.create_user.username
