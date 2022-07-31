@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ミカミカ-味覚マッチングサービス tp_beginner7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+<header>
+<h1 id="logo"><a href="index1.html">
+<img src="img/MikaMika.png" alt="MikaMika"></a>
+</h1>
+<nav>
+    <ul>
+      <li><a href="company.html">about MikaMika</a></li>
+    </ul>
+  </nav>
+</header>
+
+{% if user.is_authenticated %}
+{{ user.get_username }}様、ようこそ
+{% endif %}
+
+<h1>味覚のマッチングを目指そう</h1>
+
+<h2>評価登録の表示</h2>
+<p>good評価の件数は、{{ gcount }} 件</p>
+<p>soso評価の件数は、{{ scount }} 件</p>
+<input type="button" onclick="location.href=''"  value="編集">
+
+<h2>good,sosoの店の評価をしよう</h2>
+<input type="button" onclick="location.href=''"  value="評価登録">
+
+<h2>現在のマッチング率１位のユーザーは、{{ matti1 }}です</h2>
+
+<h2>{{ matti1 }}様のgood評価の店は下記になります</h2>
+<p><input type="checkbox" value="">{{  }}</p>
+<p><input type="checkbox" value="">{{  }}</p>
+   <input type="checkbox" value="">{{  }}<p>
+   <input type="button" onclick="location.href=''"  value="評価登録">
+</p>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

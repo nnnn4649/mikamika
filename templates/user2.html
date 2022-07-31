@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ミカミカ-味覚マッチングサービス tp_beginner7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+<header>
+<h1 id="logo"><a href="index1.html">
+<img src="img/MikaMika.png" alt="MikaMika"></a>
+</h1>
+<nav>
+    <ul>
+      <li><a href="company.html">about MikaMika</a></li>
+    </ul>
+  </nav>
+</header>
+
+{% if user.is_authenticated %}
+<h1>{{ user.get_username }}様の評価登録情報です</h1>
+{% endif %}
+
+<h2>good評価の店一覧</h2>
+<p>{{ mikamika.store  }}</p>
+
+<h2>soso評価の店一覧</h2>
+<p>{{ mikamika.store    }}</p>
+<p><a href="{% url 'mikamika:user' %}">編集</a></p>
+<p><a href="{% url 'mikamika:user' %}">戻る</a></p>
+
+
+</body>
+</html>

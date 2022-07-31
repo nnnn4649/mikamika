@@ -1,3 +1,4 @@
+from ssl import _create_unverified_context
 from django.views.generic import TemplateView
 from django.views.generic import CreateView
 from django.views.generic import ListView
@@ -11,6 +12,7 @@ from django.utils import timezone
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 import random
+from django.db.models import Q
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -64,19 +66,33 @@ class MikamikaCreateCompleteView(TemplateView):
 class MikamikaUser(LoginRequiredMixin, TemplateView):
       template_name = 'user.html'
       login_url = '/account/login/'
-
+        
       def mikamika_user(request):
-         template_name = 'user.html'
-         gcount = Mikamika.objects.values_list("store",flat=True)
-         scount = Mikamika.objects.values_list("store",flat=True)
-         context = {'gcount'  : gcount,
-                    'scount'  : scount,}
+          template_name = 'user.html'
+          uflag = request.POST['username']
+          gcount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=uflag).count()
+          scount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='0',create_user=uflag).count()
+          context = {'gcount'  : gcount,
+                     'scount'  : scount,}
+          return render(request, template_name , context)
 
-         return render(request, template_name , context)
+      def mikamika_user2(request):
+          template_name = 'user.html'
+          uflag    = request.POST['username']
+          ustore   = Mikamika.objects.values_list("store",flat=True).filter(create_user=uflag) 
+          uhyouka  = Mikamika.objects.values_list("hyouka",flat=True).filter(create_user=uflag)
+          sustore  = set(ustore)
+          suhyouka = set(uhyouka)
+          mstore   = Mikamika.objects.filter(store__in=sustore)
+          matti1   = Mikamika.objects.filter(store__in=sustore)
+         
+          context2 = {'matti1' : matti1,}
 
-#class MikamikaListView(ListView): 
-#   template_name = 'mikamika_list.html'
-#    model = Mikamika
+          return render(request, template_name , context2)
+
+class MikamikaListView(ListView): 
+      template_name = 'mikamika_list.html'
+      model = Mikamika
 
 class MikamikaDetailView(DetailView):
     template_name = 'mikamika_detail.html'
