@@ -14,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import random
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from collections import Counter
+import re
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -71,22 +73,22 @@ def  mikamika_user(request):
      gcount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=uflag).count()
      scount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='0',create_user=uflag).count()
      
-     ustore   = Mikamika.objects.values_list("store" ,flat=True).filter(create_user=uflag)
-     uhyouka  = Mikamika.objects.values_list("hyouka",flat=True).filter(create_user=uflag)
-     sustore  = set(ustore)
-     mstore   = Mikamika.objects.filter(store__in=sustore)
+     ustore = Mikamika.objects.values_list("store" ,"hyouka").filter(create_user=uflag)
+     
+     count   = len(ustore)
+     mstore  = list(ustore)
+     for index in range(count):
+         mstore[index]  = Mikamika.objects.filter(store__in=ustore[index],hyouka__in=ustore[index]).exclude(create_user=uflag)
 
-     for mmstore in mstore:
-        if mmstore == 'nnnn4649':
-           print('ユーザー自身です')
-        else:
-           mstore = mstore
-     matti1  = Mikamika.objects.filter(store__in=sustore)
+     mstore2 = len(mstore)
+     matti = max(mstore,key=mstore.count)
+          
      context = {'gcount'   :  gcount,
-               'scount'    :  scount,
-               'matti1'    :  matti1,
-               'mstore'    :  mstore,
-               'uflag'     :  uflag,}
+                'scount'   :  scount,
+                'mstore'   :  mstore,
+                'mstore2'   :  mstore2,
+                'matti'    :  matti,
+                'uflag'    :  uflag,}
      return render(request, template_name , context)
 
 class MikamikaListView(ListView): 
