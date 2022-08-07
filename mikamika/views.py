@@ -78,17 +78,19 @@ def  mikamika_user(request):
      count   = len(ustore)
      mstore  = list(ustore)
      for index in range(count):
-         mstore[index]  = Mikamika.objects.filter(store__in=ustore[index],hyouka__in=ustore[index]).exclude(create_user=uflag)
+         mstore[index] = Mikamika.objects.filter(store__in=ustore[index],hyouka__in=ustore[index]).exclude(create_user=uflag)
+    
+     matti = max(mstore[index],key=mstore.count)
+     
+     mflag = matti.create_user.id
+     mgstore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=mflag)
 
-     mstore2 = len(mstore)
-     matti = max(mstore,key=mstore.count)
-          
-     context = {'gcount'   :  gcount,
-                'scount'   :  scount,
-                'mstore'   :  mstore,
-                'mstore2'   :  mstore2,
-                'matti'    :  matti,
-                'uflag'    :  uflag,}
+     context = {'gcount'    :  gcount,
+                'scount'    :  scount,
+                'matti'     :  matti,
+                'uflag'     :  uflag,
+                'mgstore'   :  mgstore,
+                'mflag'     :  mflag,}
      return render(request, template_name , context)
 
 class MikamikaListView(ListView): 

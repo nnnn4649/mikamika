@@ -11,6 +11,7 @@ HYOUKA_CHOICES = [
 TODOU_CHOICES = [
         ('0','tokyo'),
         ('1','oosaka'),
+        ('2','kyouto'),
     ]
 
 class Mikamika(models.Model):   
