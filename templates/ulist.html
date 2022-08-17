@@ -27,14 +27,24 @@
 <h1>{{ user.get_username }}様の評価登録情報です</h1>
 {% endif %}
 
+
 <h2>good評価の店一覧</h2>
-<p>{{ mikamika.store  }}</p>
+<form method="post">
+{% csrf_token %}
+{% for mgupk,mmgustore in mgustore%}
+<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">{{ mmgustore }}</a></p>  
+{% endfor %}
+</form>
 
 <h2>soso評価の店一覧</h2>
-<p>{{ mikamika.store    }}</p>
-<p><a href="{% url 'mikamika:user' %}">編集</a></p>
-<p><a href="{% url 'mikamika:user' %}">戻る</a></p>
+<form method="post">
+{% csrf_token %}
+   {% for msstore in mgustore%}
+   <p><input type="radio" name="choice" value="{{ msstore }}">{{ msstore  }}</p>
+{% endfor %}
+<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a></p>
 
+<a href="{% url 'mikamika:index' %}">戻る</a>
 
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
 <p>
     {{ mikamika.date }}
-    <a href="{% url 'mikamika:mikamika_detail' mikamika.pk %}">{{ mikamika.title }}</a>
+    <a href="{% url 'mikamika:mikamika_detail' mikamika.pk %}">{{ mikamika.store }}</a>
 </p>
 {% endfor %}
 <a href="{% url 'mikamika:index' %}">戻る</a>

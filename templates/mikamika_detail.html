@@ -5,10 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<p>{{ mikamika.date }}</p>
-<p>{{ mikamika.title }}</p>
-<p>{{ mikamika.text }}</p>
-<a href="{% url 'mikamika:mikamika_update' mikamika.pk %}">編集</a> <!-- 追加 -->
+<p>{{ mikamika.store }}</p>
+<p>{{ mikamika.hyouka }}</p>
+<p>{{ mikamika.bikou }}</p><!-- 追加 -->
 <a href="{% url 'mikamika:mikamika_delete' mikamika.pk %}">削除</a> <!-- 追加 -->
 <a href="{% url 'mikamika:index' %}">戻る</a>
 </body>

@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from .forms import MikamikaForm
 from .models import Mikamika
 from django.utils import timezone
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 import random
 from django.db.models import Q
@@ -93,9 +93,57 @@ def  mikamika_user(request):
                 'mflag'     :  mflag,}
      return render(request, template_name , context)
 
+@login_required
+def  mikamika_ulist(request):
+     template_name = 'ulist.html'
+
+     uname = request.user
+     uflag = uname.id
+
+     gustore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=uflag)
+     sstore  = Mikamika.objects.values_list("store",flat=True).filter(hyouka='0',create_user=uflag)
+
+     gupk = Mikamika.objects.values_list("id",flat=True).filter(hyouka='1',create_user=uflag)
+     supk = Mikamika.objects.values_list("id",flat=True).filter(hyouka='0',create_user=uflag)
+     
+     mgustore = zip(gupk,gustore)
+
+     context = {'mgustore'  : mgustore,
+                'sstore'   :  sstore,
+                'supk'     :  supk,
+                'gupk'     :  gupk,
+                'gustore'  :  gustore,}
+
+     return render(request, template_name , context)
+
+
 class MikamikaListView(ListView): 
       template_name = 'mikamika_list.html'
       model = Mikamika
+
+
+@login_required
+def  mikamika_udetail(request):
+      template_name = 'udetail.html'
+      gustore = 1
+      sstore = 1
+      context = {'gustore'  :  gustore,
+                 'sstore'   :   sstore,}
+      return render(request, template_name , context)
+
+#@login_required
+class UupdateView(UpdateView):
+      template_name = 'uupdate.html'
+      model = Mikamika
+      fields = ('store', 'bikou','hyouka','todou')
+      success_url = reverse_lazy('mikamika:mikamika_ulist')
+
+      def form_valid(self, form):
+          mikamika = form.save(commit=False)
+          mikamika.updated_at = timezone.now()
+          mikamika.save()
+          return super().form_valid(form)
+
 
 class MikamikaDetailView(DetailView):
     template_name = 'mikamika_detail.html'
