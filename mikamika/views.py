@@ -106,9 +106,11 @@ def  mikamika_ulist(request):
      gupk = Mikamika.objects.values_list("id",flat=True).filter(hyouka='1',create_user=uflag)
      supk = Mikamika.objects.values_list("id",flat=True).filter(hyouka='0',create_user=uflag)
      
-     mgustore = zip(gupk,gustore)
-
+     mgustore = list(zip(gupk,gustore)) 
+     msustore = list(zip(supk,sstore))
+    
      context = {'mgustore'  : mgustore,
+                'msustore'  : msustore,
                 'sstore'   :  sstore,
                 'supk'     :  supk,
                 'gupk'     :  gupk,

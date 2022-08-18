@@ -31,18 +31,18 @@
 <h2>good評価の店一覧</h2>
 <form method="post">
 {% csrf_token %}
-{% for mgupk,mmgustore in mgustore%}
-<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">{{ mmgustore }}</a></p>  
+{% for mgupk, mmgustore in mgustore %}
+<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">{{ mmgustore }}</a></p>
 {% endfor %}
 </form>
 
 <h2>soso評価の店一覧</h2>
 <form method="post">
 {% csrf_token %}
-   {% for msstore in mgustore%}
-   <p><input type="radio" name="choice" value="{{ msstore }}">{{ msstore  }}</p>
+{% for msupk, mmsustore in msustore %}
+<p><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">{{ mmsustore }}</a></p>
 {% endfor %}
-<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a></p>
+
 
 <a href="{% url 'mikamika:index' %}">戻る</a>
 
