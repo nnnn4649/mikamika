@@ -32,7 +32,9 @@
 <form method="post">
 {% csrf_token %}
 {% for mgupk, mmgustore in mgustore %}
-<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">{{ mmgustore }}</a></p>
+<p>{{ mmgustore }}</p>
+<p><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a> or
+<a href="{% url 'mikamika:mikamika_udelete' mgupk %}">削除</a></p>
 {% endfor %}
 </form>
 
@@ -40,7 +42,9 @@
 <form method="post">
 {% csrf_token %}
 {% for msupk, mmsustore in msustore %}
-<p><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">{{ mmsustore }}</a></p>
+{{ mmsustore }}
+<p><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">編集</a> or 
+<a href="{% url 'mikamika:mikamika_udelete' msupk %}">削除</a></p>
 {% endfor %}
 
 

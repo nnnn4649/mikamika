@@ -61,10 +61,24 @@ def mikamika_create(request):
     context = {'usostore' : usostore,
                'ugstore' : ugstore,}
     return render(request, template_name , context)
+
+
+
+def mikamika_todoulist(request):
+    template_name = 'todoulist.html'
+
+    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')
+    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')
+    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
     
+    context = {'tstore'  : tstore,
+               'ostore'  : ostore,
+               'kstore'  : kstore,}
+    return render(request, template_name , context)
+    
+
 class MikamikaCreateCompleteView(TemplateView):
     template_name = 'mikamika_create_complete.html'
-
 
 @login_required
 def  mikamika_user(request):
@@ -147,6 +161,12 @@ class UupdateView(UpdateView):
           return super().form_valid(form)
 
 
+class UDeleteView(DeleteView):
+    template_name = 'udelete.html'
+    model = Mikamika
+    success_url = reverse_lazy('mikamika:mikamika_ulist')
+
+
 class MikamikaDetailView(DetailView):
     template_name = 'mikamika_detail.html'
     model = Mikamika
@@ -163,8 +183,5 @@ class MikamikaUpdateView(UpdateView):
         mikamika.save()
         return super().form_valid(form)
 
-class MikamikaDeleteView(DeleteView):
-    template_name = 'mikamika_delete.html'
-    model = Mikamika
-    success_url = reverse_lazy('mikamika:mikamika_list')
+
 
