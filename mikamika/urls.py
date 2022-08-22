@@ -4,7 +4,7 @@ from . import views
 app_name = 'mikamika'
 urlpatterns = [
     path('index/', views.IndexView.as_view(), name='index'),
-    path('tokoo/', views.FaView.as_view(), name='tokoo'),
+    path('tokoo/', views.TokooView.as_view(), name='tokoo'),
     path('mikamika/create/', views.mikamika_create, name='mikamika_create'),
     path('mikamika/todoulist/', views.mikamika_todoulist, name='mikamika_todoulist'),#新６
     path('mikamika/create/complete/', views.MikamikaCreateCompleteView.as_view(), name='mikamika_create_complete'),

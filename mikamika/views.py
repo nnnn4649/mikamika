@@ -18,9 +18,9 @@ from collections import Counter
 import re
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'index1.html'
 
-class FaView(LoginRequiredMixin, CreateView):
+class TokooView(LoginRequiredMixin, CreateView):
       template_name = 'tokoo.html'
       login_url = '/account/login/'
       form_class = MikamikaForm
@@ -94,11 +94,15 @@ def  mikamika_user(request):
      for index in range(count):
          mstore[index] = Mikamika.objects.filter(store__in=ustore[index],hyouka__in=ustore[index]).exclude(create_user=uflag)
     
-     matti = max(mstore[index],key=mstore.count)
+     if len(mstore) == 0:
+         matti = 'ゼロ'
+         mgstore = 'なし'
+         mflag = 0
+     else:
+         matti = max(mstore[index],key=mstore.count)
+         mflag = matti.create_user.id
+         mgstore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=mflag)
      
-     mflag = matti.create_user.id
-     mgstore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=mflag)
-
      context = {'gcount'    :  gcount,
                 'scount'    :  scount,
                 'matti'     :  matti,
