@@ -91,15 +91,18 @@ def  mikamika_user(request):
      
      count   = len(ustore)
      mstore  = list(ustore)
+     muser   = list()
      for index in range(count):
          mstore[index] = Mikamika.objects.filter(store__in=ustore[index],hyouka__in=ustore[index]).exclude(create_user=uflag)
-    
-     if len(mstore) == 0:
+         mlist = list(mstore[index])
+         muser.extend(mlist)
+         
+     if len(muser) == 0:
          matti = 'ゼロ'
          mgstore = 'なし'
          mflag = 0
      else:
-         matti = max(mstore[index],key=mstore.count)
+         matti = max(muser,key=muser.count)
          mflag = matti.create_user.id
          mgstore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=mflag)
      
@@ -107,8 +110,10 @@ def  mikamika_user(request):
                 'scount'    :  scount,
                 'matti'     :  matti,
                 'uflag'     :  uflag,
+                'muser'     :  muser,
+                'mlist'     :  mlist,
                 'mgstore'   :  mgstore,
-                'mflag'     :  mflag,}
+                 'mflag'     :  mflag,}
      return render(request, template_name , context)
 
 @login_required
