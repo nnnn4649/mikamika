@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>good連続評価の投稿</title>
+</head>
+<body>
+
+<h1>good→good店の表示</h1>
+
+<p>goodの店は、{{ ugtodou}}の{{ ugstore }} です</p>
+<p>上記店をgoodされた方はさらに下記店をgoodされています。
+</p>
+
+<p>もう一つのgoodの店は、{{ ugtodou2 }}の{{ ugstore2 }} です</p>
+
+<p>上記店は行かれたことがありますか？</p>
+<p><a href="{% url 'mikamika:mikamika_create' %}">行ったことない</a></p>
+<p>行かれたことがなければ、ぜひ一度行ってみてはいかがでしょうか</p>
+<p></p>
+<p>行ったことがありましたら、評価はいかがでしたでしょうか？</p>
+<p><a href="{% url 'mikamika:mikamika_create' %}">あんまり</a> or <a href="{% url 'mikamika:mikamika_create' %}">また行きたい</a></p>
+<p></p>
+
+
+<h2>■ユーザー登録をされている方はこちらで店の評価を登録して、マッチングユーザーをみつけよう</h2>
+<p>またより洗練されたgoodの店をみつけよう。</p>
+<p><a href="{% url 'mikamika:tokoo' %}">評価する</a></p>
+
+
+<h2>評価</h2>
+</body>
+</html>
