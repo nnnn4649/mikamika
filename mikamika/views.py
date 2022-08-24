@@ -27,15 +27,17 @@ class TokooView(LoginRequiredMixin, CreateView):
       model = Mikamika
       success_url = reverse_lazy('mikamika:mikamika_create_complete')
 
-     # def get_form_kwargs(self, *args, **kwargs):
-     #     kwgs = super().get_form_kwargs(*args, **kwargs)
-     #     kwgs["store"] = 'テスト'
-     #     return kwgs
+      def get_form_kwargs(self, *args, **kwargs):
+          rstore = ugstore2
+          rtodou = nugtodou2
+          kwargs = super().get_form_kwargs(*args, **kwargs)
+          kwargs.update({'rstore': rstore})
+          kwargs.update({'rtodou': rtodou})
+          return kwargs
 
       def form_valid(self, form):
           mikamika =  form.save(commit=False)
           mikamika.create_user=self.request.user
-          mikamika.store = 'テスト'
           mikamika.save()
           return super().form_valid(form)
 
@@ -90,6 +92,8 @@ def mikamika_create(request):
 
 def mikamika_create2(request):
     template_name = 'fa2.html'
+    global ugstore2 #グローバル変数
+    global nugtodou2 #グローバル変数
     
     sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
     gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
@@ -109,6 +113,8 @@ def mikamika_create2(request):
 
     ugstore  = ugstore[0]
 
+    nugtodou2 = ugstore2[1]
+
     if   ugstore2[1] == '0':
          ugtodou2 = '東京'
     elif ugstore2[1] == '1':
@@ -117,11 +123,12 @@ def mikamika_create2(request):
          ugtodou2 = '京都'
 
     ugstore2  = ugstore2[0]
-
-    context = {'ugstore'   : ugstore,
-               'ugtodou'   : ugtodou,
-               'ugstore2'  : ugstore2,
-               'ugtodou2'  : ugtodou2,}
+    
+    context = {'ugstore'    : ugstore,
+               'ugtodou'    : ugtodou,
+               'ugstore2'   : ugstore2,
+               'ugtodou2'   : ugtodou2,
+               'nugtodou2'  : nugtodou2,}
 
     return render(request, template_name , context)
 
