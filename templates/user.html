@@ -39,11 +39,11 @@
 
 <h2>現在のマッチング率１位のユーザーは、{{ matti }}です</h2>
 
-<h2>{{ matti }}様のgood評価の店は下記になります</h2>
-{% for mmgstore,mmgtodou in mgstore %}
-<p>{{ mmgstore.get_todou_display }}{{ mmgstore }}➡<a href="{% url 'mikamika:tokoo' %}">登録</a></p>
+<p>{{ matti }}様のgood評価の店は下記になります</p>
+{% for mmgstore,mmgtodou in mgstore|slice:":1" %}
+<p>{{ mmgtodou }}{{ mmgstore }}➡<a href="{% url 'mikamika:tokoo' %}">登録</a></p>
 {% endfor %}
-<p>{{ mgstore.get_todou_display }}</p>
+<p>上記店に行かれたことがなければ→別のgood店は</p>
 
 <p><a href="{% url 'mikamika:index' %}">戻る</a></p>
 

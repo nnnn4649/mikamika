@@ -59,12 +59,31 @@ def mikamika_create0(request,mttdou,mtstore):
     
     ttdou  = mttdou
     tstore = mtstore
+    tsflag = mtstore
     
-    tgtdou = 0
-    tgstore = 0
-    #sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
-    #gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+    if   ttdou == '東京':
+         tdflag = '0'
+    elif ttdou == '大阪':
+         tdflag = '1'
+    elif ttdou == '京都':
+         tdflag = '2'
 
+    mtuflag  = Mikamika.objects.values_list("create_user").filter(store=tsflag,todou=tdflag)
+    setmtuflag = set(mtuflag)
+    stuflag = random.sample(setmtuflag,k=1)
+    tuflag = stuflag[0]
+
+    tstoretodou = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=tuflag).order_by('?').first()
+
+    tgstore = tstoretodou[0]
+    tgtdou  = tstoretodou[1]
+
+    if   tgtdou == '0':
+         tgtdou = '東京'
+    elif tgtdou == '1':
+         tgtdou = '大阪'
+    elif tgtdou == '2':
+         tgtdou = '京都' 
 
     context = {'tstore'    : tstore,
                'tgstore'   : tgstore,
