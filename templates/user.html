@@ -37,16 +37,15 @@
 <h2>good,sosoの店の評価をしよう</h2>
 <p><a href="{% url 'mikamika:mikamika_create' %}">評価登録</a></p>
 
-<h2>muserは、{{ muser }}</h2>
-<h2>mlistは、{{ mlist }}</h2>
 <h2>現在のマッチング率１位のユーザーは、{{ matti }}です</h2>
 
 <h2>{{ matti }}様のgood評価の店は下記になります</h2>
-{% for mmgstore in mgstore %}
-<p>goodの店は、<input type="checkbox" value="">{{ mmgstore }}</p>
+{% for mmgstore,mmgtodou in mgstore %}
+<p>{{ mmgstore.get_todou_display }}{{ mmgstore }}➡<a href="{% url 'mikamika:tokoo' %}">登録</a></p>
 {% endfor %}
-<input type="button" onclick="location.href=''"  value="評価登録">
+<p>{{ mgstore.get_todou_display }}</p>
 
+<p><a href="{% url 'mikamika:index' %}">戻る</a></p>
 
 </body>
 </html>

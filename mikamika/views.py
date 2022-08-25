@@ -54,8 +54,29 @@ class UserView(LoginRequiredMixin, CreateView):
           mikamika.save()
           return super().form_valid(form)
 
+def mikamika_create0(request,mttdou,mtstore):
+    template_name = 'gfa.html'
+    
+    ttdou  = mttdou
+    tstore = mtstore
+    
+    tgtdou = 0
+    tgstore = 0
+    #sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
+    #gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+
+
+    context = {'tstore'    : tstore,
+               'tgstore'   : tgstore,
+               'ttdou'     : ttdou,
+               'tgtdou'    : tgtdou,}
+
+    return render(request, template_name , context)
+
 def mikamika_create(request):
     template_name = 'fa.html'
+    global ugstore2 #グローバル変数
+    global nugtodou2 #グローバル変数
     
     sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
     gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
@@ -65,6 +86,9 @@ def mikamika_create(request):
     uflag = setuflag[0]
     usostore  = Mikamika.objects.values_list("store","todou").filter(hyouka='0',create_user=uflag).order_by('?').first()
     ugstore   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
+
+    nugtodou2 = ugstore[1]
+    ugstore2 = ugstore[0]
 
     if   usostore[1] == '0':
          usotodou = '東京'
@@ -83,10 +107,12 @@ def mikamika_create(request):
     usostore = usostore[0]
     ugstore  = ugstore[0]
 
-    context = {'usostore' : usostore,
-               'ugstore'  : ugstore,
-               'usotodou' : usotodou,
-               'ugtodou'  : ugtodou,}
+    context = {'usostore'   : usostore,
+               'ugstore'    : ugstore,
+               'usotodou'   : usotodou,
+               'ugtodou'    : ugtodou,
+                'ustore2'   : ugstore2,
+               'nugtodou2'  : nugtodou2,}
 
     return render(request, template_name , context)
 
@@ -152,6 +178,10 @@ class MikamikaCreateCompleteView(TemplateView):
 @login_required
 def  mikamika_user(request):
      template_name = 'user.html'
+
+     global ugstore2 #グローバル変数
+     global nugtodou2 #グローバル変数
+
      uflag = request.user
      gcount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=uflag).count()
      scount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='0',create_user=uflag).count()
@@ -169,12 +199,16 @@ def  mikamika_user(request):
      if len(muser) == 0:
          matti = 'ゼロ'
          mgstore = 'なし'
+         ugstore2 = '未登録'
+         nugtodou2 = '0'
          mflag = 0
      else:
          matti = max(muser,key=muser.count)
          mflag = matti.create_user.id
-         mgstore = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=mflag)
-     
+         mgstore = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=mflag)
+         ugstore2  = mgstore[0][0]
+         nugtodou2 = mgstore[0][1]         
+
      context = {'gcount'    :  gcount,
                 'scount'    :  scount,
                 'matti'     :  matti,
@@ -182,7 +216,8 @@ def  mikamika_user(request):
                 'muser'     :  muser,
                 'mlist'     :  mlist,
                 'mgstore'   :  mgstore,
-                 'mflag'     :  mflag,}
+                 'mflag'    :  mflag,
+                 'ugstore2' :  ugstore2,}
      return render(request, template_name , context)
 
 @login_required
@@ -229,8 +264,10 @@ def  mikamika_udetail(request):
 class UupdateView(UpdateView):
       template_name = 'uupdate.html'
       model = Mikamika
-      fields = ('store', 'bikou','hyouka','todou')
+      form_class = MikamikaForm
+      #fields = ('store', 'bikou','hyouka','todou')
       success_url = reverse_lazy('mikamika:mikamika_ulist')
+
 
       def form_valid(self, form):
           mikamika = form.save(commit=False)

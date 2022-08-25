@@ -7,7 +7,7 @@ class MikamikaForm(forms.ModelForm):
         model = Mikamika
         fields = ('store','bikou','hyouka','todou')
         widgets = {
-            'store' : forms.TextInput(attrs={'class'  : 'form-control'}),
+            'store' : forms.TextInput(attrs={'readonly':'readonly'}),
             'bikou' : forms.TextInput(attrs={'class'  : 'form-control'}),
             'hyouka': forms.RadioSelect(attrs={'class': 'form-control'}),
             'todou' : forms.RadioSelect(attrs={'class': 'form-control'}),

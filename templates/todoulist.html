@@ -13,19 +13,19 @@
 <h2>🔳東京</h2>
 {% for mtstore in tstore %}
 <p>{{ mtstore }}</p>
-<p><a href="{% url 'mikamika:mikamika_create' %}">評価</a></p>
+<p><a href="{% url 'mikamika:mikamika_create0' '東京' mtstore %}">評価</a></p>
 {% endfor %}
 
 <h2>🔳大阪</h2>
 {% for mostore in ostore %}
 <p>{{ mostore }}</p>
-<p><a href="{% url 'mikamika:mikamika_create' %}">評価</a></p>
+<p><a href="{% url 'mikamika:mikamika_create0' '大阪' mostore %}">評価</a></p>
 {% endfor %}
 
 <h2>🔳京都</h2>
 {% for mkstore in kstore %}
 <p>{{ mkstore }}</p>
-<p><a href="{% url 'mikamika:mikamika_create' %}">評価</a></p>
+<p><a href="{% url 'mikamika:mikamika_create0' '京都' mkstore %}">評価</a></p>
 {% endfor %}
 
 </form>
