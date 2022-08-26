@@ -24,7 +24,7 @@ class Mikamika(models.Model):
     todou = models.CharField(verbose_name="都道府県", choices=TODOU_CHOICES, max_length=10, null=True, blank=True,)
     created_at = models.DateTimeField(verbose_name='作成日時', default=timezone.now)
     updated_at = models.DateTimeField(verbose_name='編集日時', blank=True, null=True)
-
+    views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
          return self.create_user.username

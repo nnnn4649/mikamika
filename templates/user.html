@@ -40,10 +40,10 @@
 <h2>現在のマッチング率１位のユーザーは、{{ matti }}です</h2>
 
 <p>{{ matti }}様のgood評価の店は下記になります</p>
-{% for mmgstore,mmgtodou in mgstore|slice:":1" %}
+{% for mmgstore,mmgtodou in mgstore %}
 <p>{{ mmgtodou }}{{ mmgstore }}➡<a href="{% url 'mikamika:tokoo' %}">登録</a></p>
 {% endfor %}
-<p>上記店に行かれたことがなければ→別のgood店は</p>
+<p>上記店に行かれたことがなければ→別のgood店は<a href="{% url 'mikamika:mikamika_user' %}">こちら</a></p>
 
 <p><a href="{% url 'mikamika:index' %}">戻る</a></p>
 

@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from .forms import MikamikaForm
 from .models import Mikamika
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 import random
 from django.db.models import Q
@@ -17,8 +17,18 @@ from django.contrib.auth.decorators import login_required
 from collections import Counter
 import re
 
-class IndexView(TemplateView):
+def Index(request):
     template_name = 'index1.html'
+
+    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')
+    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')
+    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
+    
+    context = {'tstore'  : tstore,
+               'ostore'  : ostore,
+               'kstore'  : kstore,}
+    return render(request, template_name , context)
+    
 
 class TokooView(LoginRequiredMixin, CreateView):
       template_name = 'tokoo.html'
@@ -97,6 +107,10 @@ def mikamika_create(request):
     global ugstore2 #グローバル変数
     global nugtodou2 #グローバル変数
     
+   # count = scount
+   # Mikamika.views += 1
+   # Mikamika.save()
+
     sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
     gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
 
@@ -176,19 +190,6 @@ def mikamika_create2(request):
                'nugtodou2'  : nugtodou2,}
 
     return render(request, template_name , context)
-
-
-def mikamika_todoulist(request):
-    template_name = 'todoulist.html'
-
-    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')
-    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')
-    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
-    
-    context = {'tstore'  : tstore,
-               'ostore'  : ostore,
-               'kstore'  : kstore,}
-    return render(request, template_name , context)
     
 
 class MikamikaCreateCompleteView(TemplateView):
@@ -225,6 +226,9 @@ def  mikamika_user(request):
          matti = max(muser,key=muser.count)
          mflag = matti.create_user.id
          mgstore = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=mflag)
+         setmgstore = set(mgstore)
+         mgstore = random.sample(setmgstore,k=1)
+         
          ugstore2  = mgstore[0][0]
          nugtodou2 = mgstore[0][1]         
 

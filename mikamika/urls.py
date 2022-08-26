@@ -3,12 +3,11 @@ from . import views
  
 app_name = 'mikamika'
 urlpatterns = [
-    path('index/', views.IndexView.as_view(), name='index'),
+    path('index/', views.Index, name='index'),
     path('tokoo/', views.TokooView.as_view(), name='tokoo'),
     path('mikamika/create/', views.mikamika_create, name='mikamika_create'),
     path('mikamika/create2/', views.mikamika_create2, name='mikamika_create2'),#新
     path('mikamika/create0/<mttdou>/<mtstore>/', views.mikamika_create0, name='mikamika_create0'),#新
-    path('mikamika/todoulist/', views.mikamika_todoulist, name='mikamika_todoulist'),#新６
     path('mikamika/create/complete/', views.MikamikaCreateCompleteView.as_view(), name='mikamika_create_complete'),
     path('mikamika/user/', views.mikamika_user, name='mikamika_user'),# 新
     path('mikamika/ulist/', views.mikamika_ulist, name='mikamika_ulist'),# 新2
