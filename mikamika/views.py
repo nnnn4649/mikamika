@@ -107,9 +107,15 @@ def mikamika_create(request):
     global ugstore2 #グローバル変数
     global nugtodou2 #グローバル変数
     
-   # count = scount
-   # Mikamika.views += 1
-   # Mikamika.save()
+    mikamika = get_object_or_404(Mikamika,id='5341ebb0-4e6f-462c-9bb6-517f83beda3c')
+    mikamika.views += 1
+    mikamika.save()
+
+    if mikamika.views > 2:
+       mikamika.views = 0
+       mikamika.save()
+
+       return redirect('http://127.0.0.1:8000/account/login/')
 
     sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
     gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
@@ -145,7 +151,8 @@ def mikamika_create(request):
                'usotodou'   : usotodou,
                'ugtodou'    : ugtodou,
                 'ustore2'   : ugstore2,
-               'nugtodou2'  : nugtodou2,}
+               'nugtodou2'  : nugtodou2,
+               'mikamika'  : mikamika,}
 
     return render(request, template_name , context)
 
