@@ -35,16 +35,6 @@ video {max-width: 100%;}
 /*iframeタグ*/
 iframe {width: 100%;}
 
-/*リンクテキスト全般の設定
----------------------------------------------------------------------------*/
-a {
-	color: #555;	/*文字色*/
-}
-
-a:hover {
-	color: #999;	/*マウスオン時の文字色*/
-}
-
 /*headerブロック（ロゴが入った最上段のブロック）
 ---------------------------------------------------------------------------*/
 /*headerブロック*/
@@ -77,12 +67,6 @@ li{
     padding:0 10px;
 	margin-left:0px;
 }
-/*リンクテキストの設定*/
-#menubar a {
-	display: block;
-    text-decoration: none;
-	padding: 0 8px;	/*上下、左右へのテキスト内にとる余白。*/
-}
 
 /*メニュー１個あたりの設定*/
 #menubar li {
@@ -108,8 +92,6 @@ li{
 	transform: scaleX(1);
 }
 
-/*mainブロック
----------------------------------------------------------------------------*/
 .todou-box {
 	display:flex;
 	justify-content:center;
@@ -120,6 +102,18 @@ li{
     padding: 0px;
     margin:  30px;              /* 外側の余白 */
     width: 20%;                 /* 幅指定 */
+}
+
+.link1 {
+
+	text-decoration:underline;
+	text-decoration-color:blue;
+  }
+
+a {
+	text-decoration:underline;
+	text-decoration-color:black;
+
 }
 
 h1 {
@@ -156,91 +150,6 @@ h2 + h3, h2 + p, h3 + p {
 }
 
 
-/*スライドショー（slickを使用）
----------------------------------------------------------------------------*/
-.mainimg {
-	position: relative;
-}
-
-.slick-slide {
-    margin: 10px;	/*スライドショー画像同士の間にあけるスペース*/
-}
-
-.slick-slide img {
-    border-radius: 10px;	/*画像の角丸。丸くカットしない場合は、この１行を削除。*/
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);	/*ボックスの影。右へ、下へ、ぼかし幅の順。0,0,0は黒色のことで0.2は色が20%出た状態のこと。*/
-}
-
-/*丸いページナビボタン全体を囲むブロック*/
-.slick-dots {
-	text-align: center;
-	width: 100%;
-	margin:0;padding: 0;
-	line-height: 1;
-	position: absolute;
-	bottom: 20px;	/*下からの配置場所指定*/
-}
-
-/*丸いページナビボタン１個あたりの設定*/
-.slick-dots li {
-	display: inline-block;
-	margin: 0 10px;
-	cursor: pointer;
-}
-
-/*buttonタグ*/
-.slick-dots li button {
-	display: block;
-    padding: 0;
-    border: none;
-    border: 1px solid #555;	/*枠線の幅、線種、色*/
-	text-indent: -9999px;	/*デフォルトで文字が出るので画面の外に追い出す指定*/
-	width: 12px;			/*ボタンの幅*/
-	height: 12px;			/*ボタンの高さ*/
-	border-radius: 50%;		/*丸くする指定*/
-	background: #fff;		/*背景色。白。*/
-}
-
-/*buttonのアクティブ時（現在表示されている画像を示すボタン）*/
-.slick-dots li.slick-active button {
-	background: #555;	/*色*/
-}
-
-/*テーブル
----------------------------------------------------------------------------*/
-/*テーブル１行目に入った見出し部分（※caption）*/
-.ta1 caption {
-	border-top: 1px solid #ccc;		/*上の枠線の幅、線種、色。*/
-	font-weight: bold;				/*太字に*/
-	padding: 10px 5px;				/*上下、左右へのボックス内の余白。基本的に数行下の「.ta1 th, .ta1 td」のpaddingと揃えておけばOKです。*/
-    background: rgba(0,0,0,0.1);	/*背景色。0,0,0は黒のことで0.1は色が10%出た状態。*/
-}
-
-/*ta1テーブルブロック設定*/
-.ta1 {
-	border-top: 1px solid #ccc;	/*テーブルの一番上の線。幅、線種、色。*/
-	table-layout: fixed;
-	margin: 0 auto 30px;		/*最後の「30px」がテーブルの下に空けるスペースです*/
-    width: 100%;
-}
-
-/*tr（１行分）タグ設定*/
-.ta1 tr {
-	border-bottom: 1px solid #ccc;	/*テーブルの下線。幅、線種、色。*/
-}
-
-/*th（左側）、td（右側）の共通設定*/
-.ta1 th, .ta1 td {
-	padding: 10px 5px;		/*上下、左右へのボックス内の余白*。基本的に数行上の「.ta1 caption」のpaddingと揃えておけばOKです。*/
-	word-break: break-all;	/*英語などのテキストを改行で自動的に折り返す設定。これがないと、テーブルを突き抜けて表示される場合があります。*/
-}
-
-/*th（左側）のみの設定*/
-.ta1 th {
-	width: 30%;				/*幅*/
-	text-align: left;		/*左よせにする*/
-	font-weight: normal;	/*デフォルトの太字を標準にする*/
-}
 
 
 /*PAGE TOP（↑）設定
