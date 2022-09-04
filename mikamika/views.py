@@ -7,6 +7,7 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.urls import reverse_lazy
 from .forms import MikamikaForm
+from .forms import MikamikaUploadForm
 from .models import Mikamika
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
@@ -327,6 +328,26 @@ class MikamikaUpdateView(UpdateView):
         mikamika.updated_at = timezone.now()
         mikamika.save()
         return super().form_valid(form)
+
+
+from django.http import HttpResponseBadRequest
+def mikamika_upload(request):
+    context = {'uploadform' : MikamikaUploadForm(),
+               'id': None,
+               'url': None,}
+
+    if request.method == 'POST':
+        mikamika = MikamikaUploadForm(request.POST, request.FILES) 
+        if mikamika.is_valid():
+           mikamika.save(commit=False)
+           mikamika.image = request.FILES['image']
+           upload_image= mikamika.save()
+           context['id'] = upload_image.id
+           context['url']= upload_image.image.url
+        else:
+           return HttpResponseBadRequest("bad")
+    return render(request, 'upload.html', context)
+
 
 
 

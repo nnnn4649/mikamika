@@ -20,5 +20,9 @@ class MikamikaForm(forms.ModelForm):
         self.base_fields['todou'].initial = rtodou
         self.base_fields['todou'].widget.attrs['readonly'] = 'readonly'
         super().__init__(*args, **kwargs)
-        
+
+class MikamikaUploadForm(forms.ModelForm):
+    class Meta:
+        model = Mikamika
+        fields = ('image','create_user')
         

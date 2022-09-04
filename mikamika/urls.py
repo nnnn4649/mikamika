@@ -16,4 +16,5 @@ urlpatterns = [
     path('mikamika/uupdate/<uuid:pk>/', views.UupdateView.as_view(), name='mikamika_uupdate'), #新４
     path('mikamika/udelete/<uuid:pk>/', views.UDeleteView.as_view(), name='mikamika_udelete'),#新５
     path('mikamika/list/<uuid:pk>/', views.MikamikaListView.as_view(), name='mikamika_list'),#追加
+    path('mikamika/upload/', views.mikamika_upload, name='mikamika_upload'),
 ]

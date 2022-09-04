@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>アップロード</title>
+</head>
+<body>
+<h1>画像のアップロード</h1>
+
+<h>画像のID{{id}}の画像</h>
+<img src="{{ url }}">
+
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}  
+    {{ uploadform.as_p }}
+    <input type="submit" value="アップロード">
+</form>
+</body>
+</html>
