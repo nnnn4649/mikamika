@@ -1,16 +1,14 @@
-
----------------------------------------------------------------------------*/
 html,body {
-	overflow-x: hidden;
+	overflow-x: scroll;
     min-height: 100%;    /*背景グラデーション用*/
     font-size: 14px;    /*基準となるフォントサイズ。下の方にある「画面幅800px以上」で基準を大きなサイズに変更しています。*/
+	font-family: sans-serif;
 }
 
 body {
-	font-family: 'M PLUS Rounded 1c', "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
 	-webkit-text-size-adjust: none;
     background: #fff;	/*背景色*/
-	color: #555;	    /*全体の文字色*/
+	/*color: black;	    全体の文字色*/
 	line-height: 2;		/*行間*/
 }
 
@@ -88,9 +86,9 @@ li{
 }
 
 /*マウスオン時*/
-#menubar li:hover::before {
+/*#menubar li:hover::before {
 	transform: scaleX(1);
-}
+}*/
 
 .todou-box {
 	display:flex;
@@ -103,6 +101,33 @@ li{
     margin:  30px;              /* 外側の余白 */
     width: 20%;                 /* 幅指定 */
 }
+
+.user-box {
+	display:flex;
+	justify-content:center;
+	padding:  0px;
+	margin-bottom: 0px;	
+}
+
+.user-item {
+    padding: 0px;
+    margin:  40px;              /* 外側の余白 */
+    width: 20%;                 /* 幅指定 */
+}
+
+.toroku-box {
+	display:flex;
+	justify-content:center;
+	padding:  10px;
+	margin-bottom: 0px;	
+}
+
+.toroku-item {
+    padding: 0px;
+    margin:  30px;              /* 外側の余白 */
+    width: 30%;                 /* 幅指定 */
+}
+
 
 .link1 {
 
@@ -117,13 +142,26 @@ a {
 }
 
 h1 {
-	margin-bottom: -20px;
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 main {
     margin: 30px 30px;	/*上下、左右へのブロックの外側へ空けるスペース*/
 }
 
+main h1 {
+    display: inline-block;
+	font-size: 1.7rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	margin-bottom: 0px;	/*下に空けるスペース*/
+    letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる設定*/
+	text-align: left;	
+}
 /*ブロック内のh2タグ*/
 main h2 {
     display: inline-block;
@@ -150,27 +188,5 @@ h2 + h3, h2 + p, h3 + p {
 }
 
 
-
-
-/*PAGE TOP（↑）設定
----------------------------------------------------------------------------*/
-.pagetop-show {display: block;}
-
-.pagetop a {
-	display: block;text-decoration: none;text-align: center;
-	width: 50px;		/*幅*/
-	line-height: 50px;	/*高さ*/
-	position: fixed;
-	right: 30px;		/*右からの配置場所指定*/
-	bottom: 30px;		/*下からの配置場所指定*/
-	color: #fff;		/*文字色*/
-	background: rgba(0,0,0,0.4);	/*背景色。0,0,0は黒色のことで0.4は色が40%出た状態。*/
-	border: 1px solid #fff;	/*枠線の幅、線種、色*/
-}
-
-/*マウスオン時*/
-.pagetop a:hover {
-	background: rgba(0,0,0,0.8);	/*背景色。0,0,0は黒色のことで0.8は色が80%出た状態。*/
-}
 
 
