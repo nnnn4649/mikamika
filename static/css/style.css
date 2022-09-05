@@ -105,14 +105,15 @@ li{
 .user-box {
 	display:flex;
 	justify-content:center;
-	padding:  0px;
+	padding:  20px;
 	margin-bottom: 0px;	
+	margin-left: 50px;
 }
 
 .user-item {
     padding: 0px;
-    margin:  40px;              /* 外側の余白 */
-    width: 20%;                 /* 幅指定 */
+    margin:  20px;              /* 外側の余白 */
+    width: 30%;                 /* 幅指定 */
 }
 
 .toroku-box {
@@ -134,6 +135,36 @@ li{
 	text-decoration:underline;
 	text-decoration-color:blue;
   }
+
+
+.profile {
+	background: #FFF;
+	width: 150px;
+	padding: 1.5rem;
+	/*border: 1px solid #1a1a1a;*/
+	margin-top: -20px;
+	margin-bottom: -20px;
+  }
+  
+.profile__img {
+	display: block;
+	width: 160px;
+	height: 160px;
+	border-radius:50%;
+	margin: 0 auto;
+  }
+  
+.profile__name {
+	text-align:center;
+	font-weight:bold;
+	font-size:1.2rem;
+	margin: 1rem auto 1rem;
+	letter-spacing: 0rem;
+	margin-bottom: 0px;
+	margin-top: 20px;
+  }
+  
+
 
 a {
 	text-decoration:underline;
