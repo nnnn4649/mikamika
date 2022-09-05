@@ -24,5 +24,5 @@ class MikamikaForm(forms.ModelForm):
 class MikamikaUploadForm(forms.ModelForm):
     class Meta:
         model = Mikamika
-        fields = ('image','create_user')
+        fields = ['image','create_user']
         

@@ -330,10 +330,10 @@ class MikamikaUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-from django.http import HttpResponseBadRequest
+#from django.http import HttpResponseBadRequest
 def mikamika_upload(request):
     context = {'uploadform' : MikamikaUploadForm(),
-               'id': None,
+              # 'id': None,
                'url': None,}
 
     if request.method == 'POST':
@@ -342,10 +342,12 @@ def mikamika_upload(request):
            mikamika.save(commit=False)
            mikamika.image = request.FILES['image']
            upload_image= mikamika.save()
-           context['id'] = upload_image.id
+           #context['id'] = upload_image.id
            context['url']= upload_image.image.url
-        else:
-           return HttpResponseBadRequest("bad")
+           return render(request,'user.html',context)
+           #redirect('http://127.0.0.1:8000/mikamika/user/')
+        #else:
+          # return HttpResponseBadRequest("bad")
     return render(request, 'upload.html', context)
 
 

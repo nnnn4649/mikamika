@@ -29,12 +29,17 @@
 {% endif %}
 </main>
 
+
 <center>
+<form action="{% url 'mikamika:mikamika_upload' %}" method="POST">
+{% csrf_token %}
 <div class="profile">
-    <img class="profile__img" src="/media/img/coffee.jpg">
+    <input type = "image" img class="profile__img" src="{{ url }}" name="button_1"> 
     <div class="profile__name">名字 名前</div>
 </div>
+</form>
 </center>
+
 
 <div class="user-box">
  <div class="user-item">
