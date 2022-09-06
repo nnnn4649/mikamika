@@ -34,12 +34,17 @@
 <form action="{% url 'mikamika:mikamika_upload' %}" method="POST">
 {% csrf_token %}
 <div class="profile">
-    <input type = "image" img class="profile__img" src="{{ url }}" name="button_1"> 
+    {% if uimage %}
+    <input type = "image" img class="profile__img" src="/media/{{uimage}}" name="button_1"> 
+    {% else %}
+    <input type = "image"  img class="profile__img" src="{% static 'mikamika/default.png' %}" name="button_1">
+    {% endif %}
     <div class="profile__name">名字 名前</div>
 </div>
 </form>
 </center>
 
+URLは{{ uimage }}
 
 <div class="user-box">
  <div class="user-item">

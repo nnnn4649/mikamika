@@ -211,6 +211,9 @@ def  mikamika_user(request):
      global nugtodou2 #グローバル変数
 
      uflag = request.user
+     
+     uimage = Mikamika.objects.values_list("image",flat=True).filter(create_user=uflag).order_by("image").last()
+
      gcount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='1',create_user=uflag).count()
      scount = Mikamika.objects.values_list("store",flat=True).filter(hyouka='0',create_user=uflag).count()
      
@@ -248,7 +251,8 @@ def  mikamika_user(request):
                 'mlist'     :  mlist,
                 'mgstore'   :  mgstore,
                  'mflag'    :  mflag,
-                 'ugstore2' :  ugstore2,}
+                 'ugstore2' :  ugstore2,
+                 'uimage' : uimage,}
      return render(request, template_name , context)
 
 @login_required
@@ -344,8 +348,8 @@ def mikamika_upload(request):
            upload_image= mikamika.save()
            #context['id'] = upload_image.id
            context['url']= upload_image.image.url
-           return render(request,'user.html',context)
-           #redirect('http://127.0.0.1:8000/mikamika/user/')
+           #return render(request,'user.html',context)
+           #return redirect('http://127.0.0.1:8000/mikamika/user/')
         #else:
           # return HttpResponseBadRequest("bad")
     return render(request, 'upload.html', context)
