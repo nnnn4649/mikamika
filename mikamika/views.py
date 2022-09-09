@@ -349,11 +349,11 @@ def mikamika_upload(request):
            #context['id'] = upload_image.id
            context['url']= upload_image.image.url
            #return render(request,'user.html',context)
-           #return redirect('http://127.0.0.1:8000/mikamika/user/')
+           return redirect('http://127.0.0.1:8000/mikamika/user/')
         #else:
           # return HttpResponseBadRequest("bad")
     return render(request, 'upload.html', context)
 
+def mikamika_chat(request):
 
-
-
+    return render(request, 'chat.html')
