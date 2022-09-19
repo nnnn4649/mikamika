@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
     <title>My Chat</title>
 </head>
 <body>
@@ -19,15 +21,16 @@
         </form>
        </div>
 
-      <div id="div_chat_screen">
+      <div id="div_chat_screen" >
        <button onclick="onclickButton_LeaveChat()">Leave Chat.</button><br />
         User name : <input type="text" id="text_username" readonly="readonly"><br />
        <form action="" onsubmit="onsubmitButton_Send(); return false;">
         Message : <input type="text" id="input_message" autocomplete="off" autofocus /><input type="submit" value="Send" />
        </form>
-       <ul id="list_message"></ul>
-      </div>
-
+        <div class="talk">
+         <p id="div_message" ></p>
+        </div>
+       </div>
     </div>
  </div>
 
@@ -38,6 +41,8 @@
         const g_elementTextUserName = document.getElementById( "text_username" );
         const g_elementInputMessage = document.getElementById( "input_message" );
         const g_elementListMessage = document.getElementById( "list_message" );
+        const g_elementListMessage2 = document.getElementById( "list_message2" );
+        const g_elementDivMessage = document.getElementById( "div_message" );
 
         // WebSocketオブジェクト
         let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
@@ -112,13 +117,45 @@
             let data = JSON.parse( event.data );
 
             // メッセージの整形
-            //let strMessage = data["message"];
-            let strMessage = "名前：" + data["username"] + "  "+"メッセージ："+ data["message"];
+            let strMessage = data["message"];
+            let strUsername = data["username"];
 
             // 拡散されたメッセージをメッセージリストに追加
             let elementLi = document.createElement( "li" );
-            elementLi.textContent = strMessage;
-            g_elementListMessage.prepend( elementLi ); // リストの一番上に追加
+            let elementDiv = document.createElement( "div" );
+            let iconimg = document.createElement( "img" );
+            //elementLi.textContent = strMessage;
+            elementDiv.textContent = strMessage;
+            
+
+            if (strUsername == "test5"){
+
+                elementDiv.style.cssText = 
+               'background: Lime;text-align:reft;border-radius:10px;width:50px;height:50px;margin-right:0;margin-left:auto;';
+               //g_elementDivMessage.classList.add("inputText");
+                g_elementDivMessage.append(elementDiv);
+
+                //strMessage = '0';
+            }else{
+                
+                elementDiv.style.cssText = 
+                'background: white;text-align:left;border-radius:10px;width:50px;height:50px;margin-left:0;margin-right:auto;';
+                //g_elementDivMessage.classList.add("inputText2");
+                iconimg.src ="/static/mikamika/MikaMika.png";
+                iconimg.width ="50";
+                g_elementDivMessage.append(iconimg);
+                g_elementDivMessage.append(elementDiv);
+                //g_elementDivMessage.before(iconimg);
+                //div.appendChild(elementLi);
+
+                //elementLi.classList.add('left');
+                //g_elementListMessage.classList.add("inputText2");
+                //strMessage.style.cssText = 'background: white;';
+                //strMessage = '1';
+            }
+
+            //elementLi.textContent = strMessage;
+            //g_elementListMessage.prepend( elementLi ); // リストの一番上に追加
             //g_elementListMessage.append( elementLi );    // リストの一番下に追加
         };
 
