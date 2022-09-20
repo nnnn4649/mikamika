@@ -33,21 +33,23 @@ class ChatConsumer( AsyncWebsocketConsumer ):
         text_data_json = json.loads( text_data )
 
         # チャットへの参加時の処理
-        if( 'join' == text_data_json.get( 'data_type' ) ):
+        #if( 'join' == text_data_json.get( 'data_type' ) ):
             # ユーザー名をクラスメンバー変数に設定
-            self.strUserName = text_data_json['username']
+        #    self.strUserName = text_data_json['username']
             # チャットへの参加
-            await self.join_chat()
+      #      await self.join_chat()
 
         # チャットからの離脱時の処理
-        elif( 'leave' == text_data_json.get( 'data_type' ) ):
+        if( 'leave' == text_data_json.get( 'data_type' ) ):
             # チャットからの離脱
             await self.leave_chat()
 
         # メッセージ受信時の処理
         else:
             # メッセージの取り出し
+            self.strUserName = text_data_json['username']
             strMessage = text_data_json['message']
+            await self.join_chat()
             # グループ内の全コンシューマーにメッセージ拡散送信（受信関数を'type'で指定）
             data = {
                 'type': 'chat_message', # 受信処理関数名

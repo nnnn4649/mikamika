@@ -37,7 +37,7 @@
     {% if uimage %}
     <input type = "image" img class="profile__img" src="/media/{{uimage}}" name="button_1"> 
     {% else %}
-    <input type = "image"  img class="profile__img" src="{% static 'mikamika/default.png' %}" name="button_1">
+    <input type = "image"  img class="profile__img" src="{% static '/mikamika/default.png' %}" name="button_1">
     {% endif %}
     <div class="profile__name">名字 名前</div>
 </div>
@@ -59,6 +59,8 @@
 
 <center><h1>現在のマッチング率１位のユーザーは、</h1></center>
 <center><h1>{{ matti }}様です</h1></center>
+
+<center><h1>{{ matti }}様にメッセージを送る→<a href="{% url 'mikamika:mikamika_chat' %}">こちら</a></h1></center>
 
 <center><p>{{ matti }}様のgood評価の店は下記になります</p></center>
 {% for mmgstore,mmgtodou in mgstore %}

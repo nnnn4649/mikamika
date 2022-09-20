@@ -356,4 +356,4 @@ def mikamika_upload(request):
 
 def mikamika_chat(request):
 
-    return render(request, 'chat.html')
+    return render(request, 'mikamika_chat.html')
