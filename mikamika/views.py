@@ -40,10 +40,10 @@ class TokooView(LoginRequiredMixin, CreateView):
 
       def get_form_kwargs(self, *args, **kwargs):
           rstore = ugstore2
-          rtodou = nugtodou2
+      #   rtodou = nugtodou2
           kwargs = super().get_form_kwargs(*args, **kwargs)
           kwargs.update({'rstore': rstore})
-          kwargs.update({'rtodou': rtodou})
+      #   kwargs.update({'rtodou': rtodou})
           return kwargs
 
       def form_valid(self, form):
@@ -243,6 +243,13 @@ def  mikamika_user(request):
          ugstore2  = mgstore[0][0]
          nugtodou2 = mgstore[0][1]         
 
+         if   nugtodou2 == '0':
+              nugtodou3 = '東京'
+         elif nugtodou2 == '1':
+              nugtodou3 = '大阪'
+         elif nugtodou2 == '2':
+              nugtodou3 = '京都'
+
      context = {'gcount'    :  gcount,
                 'scount'    :  scount,
                 'matti'     :  matti,
@@ -252,6 +259,8 @@ def  mikamika_user(request):
                 'mgstore'   :  mgstore,
                  'mflag'    :  mflag,
                  'ugstore2' :  ugstore2,
+                 'nugtodou2' :  nugtodou2,
+                 'nugtodou3' :  nugtodou3,
                  'uimage' : uimage,}
      return render(request, template_name , context)
 

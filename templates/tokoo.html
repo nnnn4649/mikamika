@@ -1,20 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>評価の登録</title>
+<meta charset="UTF-8">
+<title>評価登録</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
 
-{% if user.is_authenticated %}
-{{ user.get_username }}さんログイン中
-{% endif %}
+<header>
+    <h1 id="logo"><a href="{% url 'mikamika:index' %}">
+    <img src="/static/mikamika/logo.png" alt="MikaMika"></a>
+    </h1>
+    <nav>
+     <ul>
+          <li><a href="{% url 'account_logout' %}"style="text-decoration:none;">ログアウト</li></a>
+          <li><a href="{% url 'account_login' %}"style="text-decoration:none;">会員登録</li></a>
+     </ul>
+    </nav>            
+</header>
 
+{% if user.is_authenticated %}
+<center><h2>{{ user.get_username }}様の評価登録</h2></center>
+{% endif %}
+<center>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+   <h2>{{ form.as_p }}</h2>
     <button type="submit">登録</button>
 </form>
+</center>
 
 </body>
 </html>
