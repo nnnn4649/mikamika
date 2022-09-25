@@ -21,9 +21,9 @@ import re
 def Index(request):
     template_name = 'index1.html'
 
-    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')
-    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')
-    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
+    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')[1:4]
+    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')[1:4]
+    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')[1:4]
     
     context = {'tstore'  : tstore,
                'ostore'  : ostore,

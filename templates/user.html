@@ -23,9 +23,11 @@
     </nav>            
 </header>
 
+<hr style="border-top: 1px solid #ccc">
+
 <main>
 {% if user.is_authenticated %}
-<h1>{{ user.get_username }}様、ようこそ</h1>
+<h1 style="border-bottom: 3px solid orange">{{ user.get_username }}様、ようこそ</h1>
 {% endif %}
 </main>
 
@@ -45,32 +47,35 @@
 
 <div class="user-box">
  <div class="user-item">
- <h2>good評価の件数</h2>
+ <h2 style="background-color:whitesmoke">good評価の件数</h2>
  <center><h2>{{ gcount }}件</h2></center>
  </div>
  <div class="user-item">
- <h2>soso評価の件数</h2>
+ <h2 style="background-color:whitesmoke">soso評価の件数</h2>
  <center><h2>{{scount}}件</h2></center>
  </div>
 </div>
  <center><h2><a href="{% url 'mikamika:mikamika_ulist'  %}">登録情報の編集</a></h2></center>
 
+<p></p>
+<hr style="border-top: 1px solid #ccc">
+
 <center><h1>現在のマッチング率１位のユーザーは、</h1></center>
 <center><h1>{{ matti }}様です</h1></center>
 
-<center><h1>{{ matti }}様にメッセージを送る→<a href="{% url 'mikamika:mikamika_chat' %}">こちら</a></h1></center>
+<hr style="border-top: 1px solid #ccc">
 
-<center><p>{{ matti }}様のgood評価の店は下記になります</p></center>
+<center><p style="font-size: 150%">{{ matti }}様にメッセージを送る→<a href="{% url 'mikamika:mikamika_chat' %}">こちら</a></p></center>
+
+<hr style="border-top: 1px solid #ccc">
+
+<center><p style="font-size: 150%">{{ matti }}様のgood評価の店は下記になります</p></center>
 {% for mmgstore,mmgtodou in mgstore %}
 <center><h2>{{ nugtodou3 }}の{{ mmgstore }}➡<a href="{% url 'mikamika:tokoo' %}">登録</a></h2></center>
 {% endfor %}
-<center><p>上記店に行かれたことがなければ別のgood店は</p></center>
+<center><p style="font-size: 150%">上記店に行かれたことがなければ別のgood店は</p></center>
 <center><h2><a href="{% url 'mikamika:mikamika_user' %}">→こちら</a></</h2></center>
 
-<h2>🔳good,sosoの店の評価をしよう</h2>
-<h2><a href="{% url 'mikamika:mikamika_create' %}">評価登録</a></h2>
-
-<p><a href="{% url 'mikamika:index' %}">戻る</a></p>
-
+<hr style="border-top: 1px solid #ccc">
 </body>
 </html>
