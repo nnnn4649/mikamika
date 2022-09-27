@@ -10,15 +10,15 @@
 <center>
  <div id="div_container">
     <div id="div_header">
-      <h2>{{ user.get_username }}様、メッセージボックス</h2>
+      <p>{{ user.get_username }}様、メッセージボックス</p>
     </div>
 
     <div id="div_main">
       <div id="div_chat_screen" >
        <button onclick="onclickButton_LeaveChat()">Leave Chat.</button><br />
-        User name : <input type="text" id="text_username" value="{{user.get_username}}" readonly="readonly"><br />
+        ユーザー名: <input type="text" id="text_username" value="{{user.get_username}}" readonly="readonly"><br />
        <form action="" onsubmit="onsubmitButton_Send(); return false;">
-        Message : <input type="text" id="input_message" autocomplete="off" autofocus /><input type="submit" value="Send" />
+        メッセージ: <input type="text" id="input_message" autocomplete="off" autofocus /><input type="submit" value="Send" />
        </form>
         <div class="talk">
          <p id="div_message" ></p>

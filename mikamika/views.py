@@ -17,6 +17,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from collections import Counter
 import re
+from accounts.models import CustomUser
 
 def Index(request):
     template_name = 'index1.html'
@@ -227,11 +228,12 @@ def  mikamika_user(request):
          mlist = list(mstore[index])
          muser.extend(mlist)
          
-     if len(muser) == 0:
+     if len(muser) == 0 or len(muser) == '':
          matti = 'ゼロ'
-         mgstore = 'なし'
+         mgstore = ('なし','なし')
          ugstore2 = '未登録'
          nugtodou2 = '0'
+         nugtodou3 = ''
          mflag = 0
      else:
          matti = max(muser,key=muser.count)
@@ -249,19 +251,25 @@ def  mikamika_user(request):
               nugtodou3 = '大阪'
          elif nugtodou2 == '2':
               nugtodou3 = '京都'
+          
+         mimage = Mikamika.objects.values_list("image",flat=True).filter(create_user=mflag).order_by("image").last()
+
+         mage = CustomUser.objects.get(username='nnnn4649')
 
      context = {'gcount'    :  gcount,
                 'scount'    :  scount,
                 'matti'     :  matti,
                 'uflag'     :  uflag,
                 'muser'     :  muser,
-                'mlist'     :  mlist,
+       #         'mlist'     :  mlist,
                 'mgstore'   :  mgstore,
                  'mflag'    :  mflag,
                  'ugstore2' :  ugstore2,
                  'nugtodou2' :  nugtodou2,
                  'nugtodou3' :  nugtodou3,
-                 'uimage' : uimage,}
+                 'uimage' : uimage,
+                 'mimage' : mimage,
+                  'mage' : mage,}
      return render(request, template_name , context)
 
 @login_required
@@ -366,3 +374,13 @@ def mikamika_upload(request):
 def mikamika_chat(request):
 
     return render(request, 'mikamika_chat.html')
+
+from accounts.forms import AccountForm
+from django.views import generic
+
+# Create your views here.
+class SignUpView(generic.CreateView):
+  #form_class = UserCreationForm
+  form_class = AccountForm
+  success_url = reverse_lazy('mikamika:index')
+  template_name = 'signup.html'

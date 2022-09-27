@@ -18,8 +18,9 @@
 
 <nav>
   <ul>
-    <li><a href="{% url 'account_logout' %}"style="text-decoration:none;">ログアウト</li>
-    <li><a href="{% url 'account_login' %}"style="text-decoration:none;">会員登録</li>
+    <li><a href="{% url 'login' %}"style="text-decoration:none;">ログイン</li>
+    <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</li>
+    <li><a href="{% url 'mikamika:mikamika_signup' %}"style="text-decoration:none;">会員登録</li>
     <li><a href="{% url 'mikamika:mikamika_user' %}"style="text-decoration:none;">ユーザー様</li>
   </ul>
 </nav>

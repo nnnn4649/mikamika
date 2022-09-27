@@ -17,8 +17,7 @@
     </h1>
     <nav>
      <ul>
-          <li><a href="{% url 'account_logout' %}"style="text-decoration:none;">ログアウト</li></a>
-          <li><a href="{% url 'account_login' %}"style="text-decoration:none;">会員登録</li></a>
+          <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</li></a>
      </ul>
     </nav>            
 </header>
@@ -61,6 +60,16 @@
 <hr style="border-top: 1px solid #ccc">
 
 <center><h1>現在のマッチング率１位のユーザーは、</h1></center>
+<p></p>
+{% if "img" in mimage %}
+<img src = "/media/{{mimage}}" img class="profile__img" > 
+{% else %}
+<img src = "/static/mikamika/default.png" class="profile__img">
+{% endif %}
+<center>
+{{ mage.get_age_display }}
+{{ mage.get_sex_display }}
+</center>
 <center><h1>{{ matti }}様です</h1></center>
 
 <hr style="border-top: 1px solid #ccc">

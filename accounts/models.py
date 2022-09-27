@@ -47,5 +47,10 @@ class CustomUserManager(UserManager):
 class CustomUser(AbstractUser): 
     objects = CustomUserManager()
 
+    sex = models.CharField(verbose_name="性別", max_length=1, choices=[(None, "--"), ("0", "男性"), ("1", "女性")], default=None, blank=True, null=True)
+    age = models.CharField(verbose_name="年代", max_length=1, choices=[(None, "--"), ("1", "10代"), ("2", "20代"), ("3", "30代"), ("4", "40代"), ("5", "50代")], default=None, blank=True, null=True)
+
+    REQUIRED_FIELDS = ["email", "sex", "age"]
+
     def __str__(self):
         return self.username

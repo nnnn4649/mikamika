@@ -17,22 +17,21 @@
     </h1>
     <nav>
      <ul>
-          <li><a href="{% url 'account_logout' %}"style="text-decoration:none;">ログアウト</li></a>
-          <li><a href="{% url 'account_login' %}"style="text-decoration:none;">会員登録</li></a>
+          <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</li></a>
      </ul>
     </nav>            
 </header>
 
+<center><div>
 {% if user.is_authenticated %}
-<center><h2>{{ user.get_username }}様の評価登録</h2></center>
+<h2>{{ user.get_username }}様の評価登録</h2>
 {% endif %}
-<center>
 <form method="post">
     {% csrf_token %}
    <h2>{{ form.as_p }}</h2>
     <button type="submit">登録</button>
 </form>
-</center>
-
+</div></center>
+<h2><a href="{% url 'mikamika:mikamika_user' %}">戻る</a></h2>
 </body>
 </html>
