@@ -26,7 +26,7 @@
 
 <hr style="border-top: 1px solid #ccc">
 {% if user.is_authenticated %}
-<center><h1 style="border-bottom: 3px solid orange" >{{ user.get_username }}様の登録情報</h1></center>
+<center><h1>{{ user.get_username }}様の登録情報</h1></center>
 {% endif %}
 
 <div class="toroku-box">
@@ -36,7 +36,7 @@
 {% csrf_token %}
 {% for mgupk, mmgustore in mgustore %}
 <center><h2>{{ mmgustore }}</h2></center>
-<center><h2 style="border-bottom: 3px solid orange"><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a> or
+<center><h2><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a> or
 <a href="{% url 'mikamika:mikamika_udelete' mgupk %}">削除</a></h2></center>
 {% endfor %}
 </form>
@@ -47,7 +47,7 @@
 {% csrf_token %}
 {% for msupk, mmsustore in msustore %}
 <center><h2>{{ mmsustore }}</h2></center>
-<center><h2 style="border-bottom: 3px solid orange"><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">編集</a> or 
+<center><h2><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">編集</a> or 
 <a href="{% url 'mikamika:mikamika_udelete' msupk %}">削除</a></h2></center>
 {% endfor %}
 </div>
