@@ -51,6 +51,7 @@ body {
 
 .talk{/* */
     background-image:url(/static/mikamika/wood.jpeg);
+    margin-left: 100px;
 }
 
 img{  /* ::before */

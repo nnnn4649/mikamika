@@ -19,4 +19,5 @@ urlpatterns = [
     path('mikamika/upload/', views.mikamika_upload, name='mikamika_upload'),
     path('mikamika/chat/', views.mikamika_chat, name='mikamika_chat'),
     path('mikamika/signup/', views.SignUpView.as_view(), name='mikamika_signup'),
+    path('mikamika/create3/', views.mikamika_create3, name='mikamika_create3'),
 ]

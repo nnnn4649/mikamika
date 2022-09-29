@@ -10,12 +10,11 @@
 <center>
  <div id="div_container">
     <div id="div_header">
-      <p>{{ user.get_username }}様、メッセージボックス</p>
+      <p>{{ user.get_username }}様</p>
     </div>
 
     <div id="div_main">
       <div id="div_chat_screen" >
-       <button onclick="onclickButton_LeaveChat()">Leave Chat.</button><br />
         ユーザー名: <input type="text" id="text_username" value="{{user.get_username}}" readonly="readonly"><br />
        <form action="" onsubmit="onsubmitButton_Send(); return false;">
         メッセージ: <input type="text" id="input_message" autocomplete="off" autofocus /><input type="submit" value="Send" />
@@ -27,6 +26,7 @@
     </div>
  </div>
 </center>
+<center><a href="{% url 'mikamika:mikamika_user' %}">戻る</a></center>
     <script>
      // const g_elementDivJoinScreen = document.getElementById( "div_join_screen" );
         const g_elementDivChatScreen = document.getElementById( "div_chat_screen" );

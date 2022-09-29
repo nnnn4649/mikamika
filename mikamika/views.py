@@ -34,7 +34,7 @@ def Index(request):
 
 class TokooView(LoginRequiredMixin, CreateView):
       template_name = 'tokoo.html'
-      login_url = '/account/login/'
+      login_url = '/login/'
       form_class = MikamikaForm
       model = Mikamika
       success_url = reverse_lazy('mikamika:mikamika_create_complete')
@@ -117,7 +117,7 @@ def mikamika_create(request):
        mikamika.views = 0
        mikamika.save()
 
-       return redirect('http://127.0.0.1:8000/account/login/')
+       return redirect('http://127.0.0.1:8000/accounts/login/')
 
     sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
     gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
@@ -384,3 +384,52 @@ class SignUpView(generic.CreateView):
   form_class = AccountForm
   success_url = reverse_lazy('mikamika:index')
   template_name = 'signup.html'
+
+
+def mikamika_create3(request):
+    template_name = 'ufa.html'
+    global ugstore2 #グローバル変数
+    global nugtodou2 #グローバル変数
+    
+    mikamika = get_object_or_404(Mikamika,id='5341ebb0-4e6f-462c-9bb6-517f83beda3c')
+    mikamika.views += 1
+    mikamika.save()
+
+    sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
+    gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+
+    sgstore = set(gstore) & set(sostore)
+    setuflag = random.sample(sgstore,k=1)
+    uflag = setuflag[0]
+    usostore  = Mikamika.objects.values_list("store","todou").filter(hyouka='0',create_user=uflag).order_by('?').first()
+    ugstore   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
+
+    nugtodou2 = ugstore[1]
+    ugstore2 = ugstore[0]
+
+    if   usostore[1] == '0':
+         usotodou = '東京'
+    elif usostore[1] == '1':
+         usotodou = '大阪'
+    elif usostore[1] == '2':
+         usotodou = '京都'
+    
+    if   ugstore[1] == '0':
+         ugtodou = '東京'
+    elif ugstore[1] == '1':
+         ugtodou = '大阪'
+    elif ugstore[1] == '2':
+         ugtodou = '京都'
+
+    usostore = usostore[0]
+    ugstore  = ugstore[0]
+
+    context = {'usostore'   : usostore,
+               'ugstore'    : ugstore,
+               'usotodou'   : usotodou,
+               'ugtodou'    : ugtodou,
+                'ustore2'   : ugstore2,
+               'nugtodou2'  : nugtodou2,
+               'mikamika'  : mikamika,}
+
+    return render(request, template_name , context)
