@@ -22,10 +22,19 @@ from accounts.models import CustomUser
 def Index(request):
     template_name = 'index1.html'
 
-    tstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')[1:4]
-    ostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')[1:4]
-    kstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')[1:4]
+    atstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='0')
+    aostore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='1')
+    akstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
     
+    setatstore = set(atstore)
+    tstore = random.sample(setatstore,3)
+
+    setaostore = set(aostore)
+    ostore = random.sample(setaostore,3)
+
+    setakstore = set(akstore)
+    kstore = random.sample(setakstore,3)
+
     context = {'tstore'  : tstore,
                'ostore'  : ostore,
                'kstore'  : kstore,}
@@ -235,6 +244,8 @@ def  mikamika_user(request):
          nugtodou2 = '0'
          nugtodou3 = ''
          mflag = 0
+         mimage = None
+         mage = None
      else:
          matti = max(muser,key=muser.count)
          mflag = matti.create_user.id
@@ -251,9 +262,9 @@ def  mikamika_user(request):
               nugtodou3 = '大阪'
          elif nugtodou2 == '2':
               nugtodou3 = '京都'
-          
-         mimage = Mikamika.objects.values_list("image",flat=True).filter(create_user=mflag).order_by("image").last()
+         
 
+         mimage = Mikamika.objects.values_list("image",flat=True).filter(create_user=mflag).order_by("image").last()
          mage = CustomUser.objects.get(username='nnnn4649')
 
      context = {'gcount'    :  gcount,
