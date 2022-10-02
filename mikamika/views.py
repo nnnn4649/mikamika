@@ -89,36 +89,52 @@ def mikamika_create0(request,mttdou,mtstore):
     elif ttdou == '京都':
          tdflag = '2'
 
-    mtuflag  = Mikamika.objects.values_list("create_user").filter(store=tsflag,todou=tdflag)
+    mtuflag  = Mikamika.objects.values_list("create_user").filter(store=tsflag,todou=tdflag).exclude(create_user=9)
     setmtuflag = set(mtuflag)
-    stuflag = random.sample(setmtuflag,k=1)
-    tuflag = stuflag[0]
 
-    tstoretodou = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=tuflag).order_by('?').first()
+    lenflag = len(setmtuflag)
 
-    tgstore = tstoretodou[0]
-    tgtdou  = tstoretodou[1]
+    if  lenflag >=   1:
+        stuflag = random.sample(setmtuflag,k=1)
+        tuflag = stuflag[0]
 
-    if   tgtdou == '0':
-         tgtdou = '東京'
-    elif tgtdou == '1':
-         tgtdou = '大阪'
-    elif tgtdou == '2':
-         tgtdou = '京都' 
+        tstoretodou = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=tuflag).order_by('?').first()
 
+        if tstoretodou == None:
+           tgstore = '未登録'
+           tgtdou  = '未登録'
+        else:
+           tgstore = tstoretodou[0]
+           tgtdou  = tstoretodou[1]
+
+           if   tgtdou == '0':
+                tgtdou = '東京'
+           elif tgtdou == '1':
+                tgtdou = '大阪'
+           elif tgtdou == '2':
+                tgtdou = '京都' 
+
+    else:
+          tgstore = '未登録'
+          tgtdou  = '未登録'
+          
     context = {'tstore'    : tstore,
                'tgstore'   : tgstore,
                'ttdou'     : ttdou,
+         #      'lenflag'     :lenflag,
                'tgtdou'    : tgtdou,}
 
     return render(request, template_name , context)
 
-def mikamika_create(request):
+def mikamika_create(request,tstore):
     template_name = 'fa.html'
     global ugstore2 #グローバル変数
     global nugtodou2 #グローバル変数
     
-    mikamika = get_object_or_404(Mikamika,id='5341ebb0-4e6f-462c-9bb6-517f83beda3c')
+    ttstore = tstore 
+    ttstore == None
+       
+    mikamika = get_object_or_404(Mikamika,id='ed9e8b98-7b35-4e06-89dd-51d8f3c7ee60')
     mikamika.views += 1
     mikamika.save()
 
