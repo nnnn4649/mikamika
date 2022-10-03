@@ -126,76 +126,170 @@ def mikamika_create0(request,mttdou,mtstore):
 
     return render(request, template_name , context)
 
-def mikamika_create(request,tstore):
+def mikamika_create(request,ttdou,tstore):
     template_name = 'fa.html'
     global ugstore2 #グローバル変数
-    global nugtodou2 #グローバル変数
+  #  global nugtodou2 #グローバル変数
     
+    tttdou = ttdou
     ttstore = tstore 
-    ttstore == None
        
-    mikamika = get_object_or_404(Mikamika,id='ed9e8b98-7b35-4e06-89dd-51d8f3c7ee60')
-    mikamika.views += 1
-    mikamika.save()
+   # mikamika = get_object_or_404(Mikamika,id='ed9e8b98-7b35-4e06-89dd-51d8f3c7ee60')
+  #  mikamika.views += 1
+  #  mikamika.save()
 
-    if mikamika.views > 2:
-       mikamika.views = 0
-       mikamika.save()
+   # if mikamika.views > 2:
+   #    mikamika.views = 0
+   #    mikamika.save()
 
-       return redirect('http://127.0.0.1:8000/accounts/login/')
+   #    return redirect('http://127.0.0.1:8000/accounts/login/')
 
-    sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
-    gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+    sosouser = Mikamika.objects.values_list("create_user").filter(store=ttstore)
 
-    sgstore = set(gstore) & set(sostore)
-    setuflag = random.sample(sgstore,k=1)
-    uflag = setuflag[0]
-    usostore  = Mikamika.objects.values_list("store","todou").filter(hyouka='0',create_user=uflag).order_by('?').first()
-    ugstore   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
+    setsosouser = set(sosouser)
+    sosoflag = random.sample(setsosouser,k=1)
+    suflag = sosoflag[0]
+    ugstore = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=suflag).order_by('?').first()
 
-    nugtodou2 = ugstore[1]
-    ugstore2 = ugstore[0]
+    if ugstore == None:
+       ugstore2 = '未登録'
+       ugtodou  = '未登録'
+    else:
+       ugstore2 = ugstore[0]
+       ugtodou2 = ugstore[1]
 
-    if   usostore[1] == '0':
-         usotodou = '東京'
-    elif usostore[1] == '1':
-         usotodou = '大阪'
-    elif usostore[1] == '2':
-         usotodou = '京都'
-    
-    if   ugstore[1] == '0':
-         ugtodou = '東京'
-    elif ugstore[1] == '1':
-         ugtodou = '大阪'
-    elif ugstore[1] == '2':
-         ugtodou = '京都'
+       if   ugtodou2 == '0':
+            ugtodou = '東京'
+       elif ugtodou2 == '1':
+            ugtodou = '大阪'
+       elif ugtodou2 == '2':
+            ugtodou = '京都'
 
-    usostore = usostore[0]
-    ugstore  = ugstore[0]
-
-    context = {'usostore'   : usostore,
-               'ugstore'    : ugstore,
-               'usotodou'   : usotodou,
-               'ugtodou'    : ugtodou,
-                'ustore2'   : ugstore2,
-               'nugtodou2'  : nugtodou2,
-               'mikamika'  : mikamika,}
+    context = {'ttstore'  : ttstore,
+               'tttdou'   : tttdou,
+               'ugstore2' : ugstore2,
+               'ugtodou'  : ugtodou,}
 
     return render(request, template_name , context)
 
-def mikamika_create2(request):
+
+def mikamika_create2(request,ttdou,tstore,tgtdou,tgstore):
     template_name = 'fa2.html'
     global ugstore2 #グローバル変数
-    global nugtodou2 #グローバル変数
+    global ugtodou #グローバル変数
     
-    sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
-    gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+    tttdou   = ttdou
+    ttstore  = tstore
+    ttgtdou  = tgtdou
+    ttgstore = tgstore
 
-    sgstore = set(gstore) & set(sostore)
+    sosouser = Mikamika.objects.values_list("create_user").filter(store=ttstore).filter(store=ttgstore)
+
+    lenuser = len(sosouser)
+    if  lenuser == 0:
+        ugstore2 = '未登録'
+        ugtodou  = '未登録'
+    else:
+        setsosouser = set(sosouser)
+        sosoflag = random.sample(setsosouser,k=1)
+        suflag = sosoflag[0]
+        ugstore = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=suflag).order_by('?').first()
+
+        if ugstore == None:
+           ugstore2 = '未登録'
+           ugtodou  = '未登録'
+        else:
+           ugstore2 = ugstore[0]
+           ugtodou2 = ugstore[1]
+
+        if   ugtodou2 == '0':
+             ugtodou = '東京'
+        elif ugtodou2 == '1':
+             ugtodou = '大阪'
+        elif ugtodou2 == '2':
+             ugtodou = '京都'
+
+    context = {'ttstore'  : ttstore,
+               'tttdou'   : tttdou,
+               'ugstore2' : ugstore2,
+               'ugtodou'  : ugtodou,
+               'ttgtdou'  : ttgtdou,
+               'ttgstore'  : ttgstore,}
+
+    return render(request, template_name , context)
+
+#def mikamika_create4(request,tstore):
+   # template_name = 'fa4.html'
+   # global ugstore2 #グローバル変数
+   # global nugtodou2 #グローバル変数
+    
+    #ttstore = tstore 
+   # ttstore == None
+       
+    #mikamika = get_object_or_404(Mikamika,id='ed9e8b98-7b35-4e06-89dd-51d8f3c7ee60')
+   # mikamika.views += 1
+   # mikamika.save()
+
+   # if mikamika.views > 2:
+   #    mikamika.views = 0
+   #    mikamika.save()
+
+ #      return redirect('http://127.0.0.1:8000/accounts/login/')
+
+   # sostore  = Mikamika.objects.values_list("create_user").filter(hyouka='0')
+   # gstore   = Mikamika.objects.values_list("create_user").filter(hyouka='1')
+
+    #sgstore = set(gstore) & set(sostore)
+   # setuflag = random.sample(sgstore,k=1)
+   # uflag = setuflag[0]
+   # usostore  = Mikamika.objects.values_list("store","todou").filter(hyouka='0',create_user=uflag).order_by('?').first()
+   # ugstore   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
+
+   # nugtodou2 = ugstore[1]
+  #  ugstore2 = ugstore[0]
+
+  #  if   usostore[1] == '0':
+  #       usotodou = '東京'
+   # elif usostore[1] == '1':
+   #      usotodou = '大阪'
+ #   elif usostore[1] == '2':
+ #        usotodou = '京都'
+    
+  #  if   ugstore[1] == '0':
+  #       ugtodou = '東京'
+  #  elif ugstore[1] == '1':
+   #      ugtodou = '大阪'
+  #  elif ugstore[1] == '2':
+   #      ugtodou = '京都'
+
+  #  usostore = usostore[0]
+   # ugstore  = ugstore[0]
+
+#    context = {'usostore'   : usostore,
+   #            'ugstore'    : ugstore,
+   #            'usotodou'   : usotodou,
+  #             'ugtodou'    : ugtodou,
+  #              'ustore2'   : ugstore2,
+  #             'nugtodou2'  : nugtodou2,
+  #             'mikamika'  : mikamika,}
+
+  #  return render(request, template_name , context)
+
+def mikamika_create3(request,tgtdou,tgstore):
+    template_name = 'fa3.html'
+    global ugstore2 #グローバル変数
+   # global nugtodou2 #グローバル変数
+
+    ttgtdou  = tgtdou
+    ttgstore = tgstore
+    
+    gstore   = Mikamika.objects.values_list("create_user").filter(store=ttgstore)
+
+    sgstore = set(gstore)
     setuflag = random.sample(sgstore,k=1)
     uflag = setuflag[0]
     ugstore   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
-    ugstore2   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
+  # ugstore2   = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=uflag).order_by('?').first()
     
     if   ugstore[1] == '0':
          ugtodou = '東京'
@@ -206,22 +300,22 @@ def mikamika_create2(request):
 
     ugstore  = ugstore[0]
 
-    nugtodou2 = ugstore2[1]
+  #  nugtodou2 = ugstore2[1]
 
-    if   ugstore2[1] == '0':
-         ugtodou2 = '東京'
-    elif ugstore2[1] == '1':
-         ugtodou2 = '大阪'
-    elif ugstore2[1] == '2':
-         ugtodou2 = '京都'
-
-    ugstore2  = ugstore2[0]
+  #  if   ugstore2[1] == '0':
+ #        ugtodou2 = '東京'
+ #   elif ugstore2[1] == '1':
+  #       ugtodou2 = '大阪'
+  #  elif ugstore2[1] == '2':
+   # ugstore2  = ugstore2[0]
     
     context = {'ugstore'    : ugstore,
                'ugtodou'    : ugtodou,
-               'ugstore2'   : ugstore2,
-               'ugtodou2'   : ugtodou2,
-               'nugtodou2'  : nugtodou2,}
+          #     'ugstore2'   : ugstore2,
+           #    'ugtodou2'   : ugtodou2,
+        #       'nugtodou2'  : nugtodou2,
+               'ttgtdou'    : ttgtdou,
+               'ttgstore'   : ttgstore,}
 
     return render(request, template_name , context)
     

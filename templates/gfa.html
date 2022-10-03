@@ -44,14 +44,14 @@
 <p>上記店は行かれたことがありますか？</p>
 <div class="link1">
 <form method="post">
-<h2><a href="{% url 'mikamika:mikamika_create' tstore %}">No</a></h2>
+<h2><a href="{% url 'mikamika:mikamika_create' ttdou tstore %}">No</a></h2>
 </div>
 </form>
 
 <p>行かれたことがなければ、ぜひ一度行ってみてはいかがでしょうか</p>
 <p></p>
 <p>行ったことがありましたら、評価はいかがでしたでしょうか？</p>
-<h2><p><a href="{% url 'mikamika:mikamika_create' tstore %}">So-So</a>  or  <a href="{% url 'mikamika:mikamika_create2' %}">good</a></h2>
+<h2><p><a href="{% url 'mikamika:mikamika_create2' ttdou tstore tgtdou tgstore %}">So-So</a>  or  <a href="{% url 'mikamika:mikamika_create3' tgtdou tgstore %}">good</a></h2>
 <p></p>
 {% endif %} 
 <hr style="border-top: 1px solid #ccc">
