@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('mikamika.urls')), # 追加：includeメソッドでurl設定を追加
   #  path('account/', include('allauth.urls')), # 追加
     path('accounts/', include('django.contrib.auth.urls')),
+  #  path('inquiry/', include('inquiries.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

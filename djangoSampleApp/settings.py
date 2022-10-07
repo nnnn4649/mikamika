@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth', # 追加
     'allauth.account', # 追加
     'allauth.socialaccount', # 追加
+    'inquiries'#追加
 ]
 
 SITE_ID = 1

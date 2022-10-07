@@ -605,3 +605,15 @@ def mikamika_create4(request):
      #          'mikamika'  : mikamika,}
 
     return render(request, template_name , context)
+
+
+from inquiries.forms import InquiryForm
+
+class InquiriesView(generic.FormView):
+ template_name = "inquiries.html"   
+ form_class = InquiryForm
+ success_url = reverse_lazy('mikamika:index')
+
+ def form_valid(self,form):
+   form.send_email()
+   return super().form_valid(form) 

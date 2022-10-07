@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ミカミカ-味覚マッチング</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+ <header>
+    <h1 id="logo">
+        <a href="{% url 'mikamika:index' %}">
+        <img src="/static/mikamika/logo.png" alt="MikaMika"></a>
+    </h1>
+ </header>
+ <body>
+
+<hr style="border-top: 1px solid #ccc">
+<center><h2>【問い合わせ】</h2>
+   <form method="post">
+     {% csrf_token %}
+     {{ form.non_field_errors }}
+     
+     {% for field in form %}
+       <div>
+         <label for="{{ field.id_for_label }}">
+           {{ field.label_tag }}
+         </label>
+         <div>
+           {{ field }}
+           {{ field.errors }}
+         </div>
+       </div>
+     {% endfor %}
+     <button type="submit">送信</button> 
+   </form>
+</center>
+
+<p><a href="{% url 'mikamika:index' %}">トップページへ戻る</a></p>
+
+ <body>
+</html>
