@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>todou→soso評価の投稿</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h1 id="logo"><a href="{% url 'mikamika:index' %}">
+    <img src="/static/mikamika/logo.png" alt="MikaMika"></a>
+    </h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</li>
+            <li><a href="{% url 'login' %}"style="text-decoration:none;">会員登録</li>
+        </ul>
+    </nav>
+        
+</header>
+
+<div style="text-align:center">
+<hr style="border-top: 1px solid #ccc">
+
+<div class="container"></div>
+
+<div class="mainimg" style="text-align:center;">
+<a><img src="/static/mikamika/soso.png" alt="" width="170" height="130" style="margin-top:40px"></a>
+
+<main>
+ <center><h2>sosoの店は、{{ ttdou }}の{{ tstore }} です</h2></center>
+ <p></p>
+ <center>上記店をsosoされた方は下記店をgoodされています。</center>
+ <p></p>
+ <center><h2>goodの店は、{{ tgtdou }}の{{ tgstore }} です</h2></center>
+</main>
+{% if tgstore == '未登録'%}
+<center><h2 style = 'color:red'>※現時点で{{ttdou}}の{{tstore}}をsosoされたユーザーがおりません</h2></center>
+{% else %}
+<p>上記店は行かれたことがありますか？</p>
+<div class="link1">
+<form method="post">
+<h2><a href="{% url 'mikamika:mikamika_create' ttdou tstore %}">No</a></h2>
+</div>
+</form>
+
+<p>行かれたことがなければ、ぜひ一度行ってみてはいかがでしょうか</p>
+<p></p>
+<p>行ったことがありましたら、評価はいかがでしたでしょうか？</p>
+<h2><p><a href="{% url 'mikamika:mikamika_create2' ttdou tstore tgtdou tgstore %}">So-So</a>  or  <a href="{% url 'mikamika:mikamika_create3' tgtdou tgstore %}">good</a></h2>
+<p></p>
+{% endif %} 
+<hr style="border-top: 1px solid #ccc">
+
+<h2 style="color:orange">ユーザー登録をすれば、あなたの味覚に一番近いユーザーが見つかります</h2>
+<p></p>
+<h2><a href="{% url 'mikamika:mikamika_user' %}">マッチングユーザーを見つけよう</a></h2>
+<p></p>
+<p><a href="{% url 'mikamika:index' %}">トップページへ戻る</a></p>
+
+</body>
+</html>

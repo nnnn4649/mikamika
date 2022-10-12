@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>good→good評価の投稿</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ここにサイト説明を入れます">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h1 id="logo"><a href="{% url 'mikamika:index' %}">
+    <img src="/static/mikamika/logo.png" alt="MikaMika"></a>
+    </h1>
+    <nav>
+     <ul>
+          <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</li>
+          <li><a href="{% url 'login' %}"style="text-decoration:none;">会員登録</li>
+     </ul>
+    </nav>            
+ </header>
+
+<div style="text-align:center;">
+
+<hr style="border-top: 1px solid #ccc">
+<a><img src="/static/mikamika/soso.png" alt="" width="170" height="130" style="margin-top:40px"></a>
+    
+<main>
+<center><h2>goodの店は、{{ tgtdou }}の{{ tgstore }} です</h2></center>
+<p></p>
+<center>上記店をgoodされた方は下記店をgoodされています。</center>
+<p></p>
+<center><h2>goodの店は、{{ ugtodou}}の{{ ugstore }} です</h2></center>
+</main>
+
+<p>上記店は行かれたことがありますか？</p>
+<p>行かれたことがなければ、ぜひ一度行ってみてはいかがでしょうか</p>
+<p></p>
+<h2><a href="{% url 'mikamika:mikamika_create3' tgtdou tgstore %}">他のgoodの店はこちら</a></h2>
+<p></p>
+
+<hr style="border-top: 1px solid #ccc">
+
+<h2 style="color:orange">ユーザー登録をすれば、あなたの味覚に一番近いユーザーが見つかります</h2>
+<p></p>
+<h2><a href="{% url 'mikamika:mikamika_user' %}">マッチングユーザーを見つけよう</a></h2>
+<p></p>
+<p><a href="{% url 'mikamika:index' %}">トップページへ戻る</a></p>

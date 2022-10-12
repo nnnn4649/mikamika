@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー様登録情報</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div id="container">
+
+  <header>
+    <h1 id="logo"><a href="{% url 'mikamika:index' %}">
+    <img src="/static/mikamika/logo.png" alt="MikaMika"></a>
+    </h1>
+    <nav>
+      <ul>
+       <li><a href="{% url 'logout' %}"style="text-decoration:none;">ログアウト</a></li>
+      </ul>
+    </nav>  
+  </header>
+
+<hr style="border-top: 1px solid #ccc">
+{% if user.is_authenticated %}
+<center><h1>{{ user.get_username }}様の登録情報</h1></center>
+{% endif %}
+
+<div class="toroku-box">
+<div class="toroku-item">
+<center><h2 style="background-color:whitesmoke">good評価の店一覧</h2></center>
+<form method="post">
+{% csrf_token %}
+{% for mgupk, mmgustore in mgustore %}
+<center><h2>{{ mmgustore }}</h2></center>
+<center><h2><a href="{% url 'mikamika:mikamika_uupdate' mgupk %}">編集</a> or
+<a href="{% url 'mikamika:mikamika_udelete' mgupk %}">削除</a></h2></center>
+{% endfor %}
+</form>
+</div>
+<div class="toroku-item">
+<center><h2 style="background-color:whitesmoke">soso評価の店一覧</h2></center>
+<form method="post">
+{% csrf_token %}
+{% for msupk, mmsustore in msustore %}
+<center><h2>{{ mmsustore }}</h2></center>
+<center><h2><a href="{% url 'mikamika:mikamika_uupdate' msupk %}">編集</a> or 
+<a href="{% url 'mikamika:mikamika_udelete' msupk %}">削除</a></h2></center>
+{% endfor %}
+</div>
+</div>
+
+<h2><a href="{% url 'mikamika:mikamika_user' %}">戻る</a></h2>
+
+</body>
+</html>

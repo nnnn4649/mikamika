@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <title>My Chat</title>
+</head>
+<body>
+ <div id="div_container">
+    <div id="div_header">
+      <h1>メッセージボックス</h1>
+    </div>
+
+    <div id="div_main">
+       <div id="div_join_screen">
+        <form action="" onsubmit="onsubmitButton_JoinChat(); return false;">
+         User name<br />
+        <input type="text" id="input_username" placeholder="Enter User name" autofocus><br /><br />
+        <input type="submit" value="Join Chat" />
+        </form>
+       </div>
+
+      <div id="div_chat_screen" >
+       <button onclick="onclickButton_LeaveChat()">Leave Chat.</button><br />
+        User name : <input type="text" id="text_username" readonly="readonly"><br />
+       <form action="" onsubmit="onsubmitButton_Send(); return false;">
+        Message : <input type="text" id="input_message" autocomplete="off" autofocus /><input type="submit" value="Send" />
+       </form>
+        <div class="talk">
+         <p id="div_message" ></p>
+        </div>
+       </div>
+    </div>
+ </div>
+
+ <center><h2><a href="{% url 'mikamika:mikamika_user' %}">戻る</a></h2></center>
+    <script>
+        const g_elementDivJoinScreen = document.getElementById( "div_join_screen" );
+        const g_elementDivChatScreen = document.getElementById( "div_chat_screen" );
+        const g_elementInputUserName = document.getElementById( "input_username" );
+        const g_elementTextUserName = document.getElementById( "text_username" );
+        const g_elementInputMessage = document.getElementById( "input_message" );
+        const g_elementListMessage = document.getElementById( "list_message" );
+        const g_elementListMessage2 = document.getElementById( "list_message2" );
+        const g_elementDivMessage = document.getElementById( "div_message" );
+
+        // WebSocketオブジェクト
+        let ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        const g_socket = new WebSocket( ws_scheme + "://" + window.location.host + "/ws/chat/" );
+
+        // 「Join」ボタンを押すと呼ばれる関数
+        function onsubmitButton_JoinChat()
+        {
+            // ユーザー名
+            let strInputUserName = g_elementInputUserName.value;
+            if( !strInputUserName )
+            {
+                return;
+            }
+            g_elementTextUserName.value = strInputUserName;
+
+            // サーバーに"join"を送信
+            g_socket.send( JSON.stringify( { "data_type": "join", "username": strInputUserName } ) );
+
+            // 画面の切り替え
+            g_elementDivJoinScreen.style.display = "none";  // 参加画面の非表示
+            g_elementDivChatScreen.style.display = "block";  // チャット画面の表示
+        }
+
+        // 「Leave Chat.」ボタンを押すと呼ばれる関数
+        function onclickButton_LeaveChat()
+        {
+            // メッセージリストのクリア
+            while( g_elementListMessage.firstChild )
+            {
+                g_elementListMessage.removeChild( g_elementListMessage.firstChild );
+            }
+
+            // ユーザー名
+            g_elementTextUserName.value = "";
+
+            // サーバーに"leave"を送信
+            g_socket.send( JSON.stringify( { "data_type": "leave" } ) );
+
+            // 画面の切り替え
+            g_elementDivChatScreen.style.display = "none";  // チャット画面の非表示
+            g_elementDivJoinScreen.style.display = "flex";  // 参加画面の表示
+        }
+
+        // 「Send」ボタンを押したときの処理
+        function onsubmitButton_Send()
+        {
+            // 送信用テキストHTML要素からメッセージ文字列の取得
+            let strMessage = g_elementInputMessage.value;
+            if( !strMessage )
+            {
+                return;
+            }
+
+            // WebSocketを通したメッセージの送信
+            g_socket.send( JSON.stringify( { "message": strMessage } ) );
+
+            // 送信用テキストHTML要素の中身のクリア
+            g_elementInputMessage.value = "";
+        }
+
+        // WebSocketからメッセージ受信時の処理
+        g_socket.onmessage = ( event ) =>
+        {
+            // 自身がまだ参加していないときは、無視。
+            if( !g_elementTextUserName.value )
+            {
+                return;
+            }
+
+            // テキストデータをJSONデータにデコード
+            let data = JSON.parse( event.data );
+
+            // メッセージの整形
+            let strMessage = data["message"];
+            let strUsername = data["username"];
+
+            // 拡散されたメッセージをメッセージリストに追加
+            let elementLi = document.createElement( "li" );
+            let elementDiv = document.createElement( "div" );
+            let iconimg = document.createElement( "img" );
+            //elementLi.textContent = strMessage;
+            elementDiv.textContent = strMessage;
+            
+
+            if (strUsername == "test5"){
+
+                elementDiv.style.cssText = 
+               'background: Lime;text-align:reft;border-radius:10px;width:50px;height:50px;margin-right:0;margin-left:auto;';
+               //g_elementDivMessage.classList.add("inputText");
+                g_elementDivMessage.append(elementDiv);
+
+                //strMessage = '0';
+            }else{
+                
+                elementDiv.style.cssText = 
+                'background: white;text-align:left;border-radius:10px;width:50px;height:50px;margin-left:0;margin-right:auto;';
+                //g_elementDivMessage.classList.add("inputText2");
+                iconimg.src ="/static/mikamika/MikaMika.png";
+                iconimg.width ="50";
+                g_elementDivMessage.append(iconimg);
+                g_elementDivMessage.append(elementDiv);
+                //g_elementDivMessage.before(iconimg);
+                //div.appendChild(elementLi);
+
+                //elementLi.classList.add('left');
+                //g_elementListMessage.classList.add("inputText2");
+                //strMessage.style.cssText = 'background: white;';
+                //strMessage = '1';
+            }
+
+            //elementLi.textContent = strMessage;
+            //g_elementListMessage.prepend( elementLi ); // リストの一番上に追加
+            //g_elementListMessage.append( elementLi );    // リストの一番下に追加
+        };
+
+        // WebSocketクローズ時の処理
+        g_socket.onclose = ( event ) =>
+        {
+            // ウェブページを閉じたとき以外のWebSocketクローズは想定外
+            console.error( "Unexpected : Chat socket closed." );
+        };
+    </script>
+</body>
+
+</html>

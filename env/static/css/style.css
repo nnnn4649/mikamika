@@ -1,0 +1,232 @@
+html,body {
+	overflow-x: scroll;
+    min-height: 100%;    /*背景グラデーション用*/
+    font-size: 14px;    /*基準となるフォントサイズ。下の方にある「画面幅800px以上」で基準を大きなサイズに変更しています。*/
+	font-family: sans-serif;
+}
+
+body {
+	-webkit-text-size-adjust: none;
+    background: #fff;	/*背景色*/
+	/*color: black;	    全体の文字色*/
+	line-height: 2;		/*行間*/
+}
+
+/*マージンのリセット*/
+figure {margin: 0;}
+dd {margin: 0;}
+
+/*table全般の設定*/
+table {border-collapse:collapse;}
+
+/*画像全般の設定*/
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+
+/*section全般の設定*/
+section + section {
+	padding-top: 30px;	/*sectionの間に空けるスペース*/
+}
+
+/*videoタグ*/
+video {max-width: 100%;}
+
+/*iframeタグ*/
+iframe {width: 100%;}
+
+/*headerブロック（ロゴが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*headerブロック*/
+header {		/*中身をセンタリングする*/		/*上に空ける余白*/
+    display: flex;
+	justify-content:space-between;	
+}
+
+
+/*ロゴテキストを画像にした場合*/
+header #logo img {
+    width:  80px;
+	height: 50px;         /*画像の幅*/
+    padding: 0px 20px;    /*上下、左右へ空ける余白*/
+}
+
+nav{
+    margin-left:auto; /*メニューを右寄せ*/
+}
+
+ul {
+    list-style: none;
+	text-align: right;
+    justify-content: space-around;
+    display: inline-block;
+}
+
+li{
+    display:inline; 
+    padding:0 10px;
+	margin-left:0px;
+}
+
+/*メニュー１個あたりの設定*/
+#menubar li {
+	display: inline-block;	/*メニューを横並びにする指定*/
+	text-align: center;		/*テキストをセンタリング*/
+    position: relative;
+}
+#menubar li::before {
+    content: "";
+    background: #ccc;	/*下線の色*/
+    height: 3px;		/*下線の高さ*/
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+	transition: 0.2s;	/*アニメーションにかける時間*/
+    transition-timing-function: ease-out;
+	transform: scaleX(0);
+}
+
+/*マウスオン時*/
+/*#menubar li:hover::before {
+	transform: scaleX(1);
+}*/
+
+hr {
+	/* 太さ 種類 色 */
+	border-top: 1px solid #ccc;
+}
+
+.todou-box {
+	display:flex;
+	justify-content:center;
+	padding:  0px;
+}
+
+.todou-item {
+    padding: 0px;
+  /*  margin-left:  0px; */             /* 外側の余白 */
+    width: 20%;
+	margin:  30px;      
+/*	text-align:center;     */    /* 幅指定 */
+}
+
+.user-box {
+	display:flex;
+	justify-content:center;
+	padding:  60px;
+	margin-bottom: 0px;	
+	margin-left: 50px;
+}
+
+.user-item {
+    padding: 0px;
+    margin:  20px;              /* 外側の余白 */
+    width: 30%;                 /* 幅指定 */
+}
+
+.toroku-box {
+	display:flex;
+	justify-content:center;
+	padding:  10px;
+	margin-bottom: 0px;		
+}
+
+.toroku-item{
+    padding: 0px;
+    margin:  30px;              /* 外側の余白 */
+    width: 30%;                 /* 幅指定 */
+}
+
+
+.link1 {
+
+	text-decoration:underline;
+	text-decoration-color:blue;
+  }
+
+
+.profile {
+	background: #FFF;
+	width: 150px;
+	padding: 1.5rem;
+	/*border: 1px solid #1a1a1a;*/
+	margin-top: -20px;
+	margin-bottom: -20px;
+  }
+  
+.profile__img {
+	display: block;
+	width: 160px;
+	height: 160px;
+	border-radius:50%;
+	margin: 0 auto;
+  }
+  
+.profile__name {
+	text-align:center;
+	font-weight:bold;
+	font-size:1.2rem;
+	margin: 1rem auto 1rem;
+	letter-spacing: 0rem;
+	margin-bottom: 0px;
+	margin-top: 20px;
+  }
+  
+
+
+a {
+	text-decoration:underline;
+	text-decoration-color:black;
+
+}
+
+h1 {
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+main {
+    margin: 50px 50px;	/*上下、左右へのブロックの外側へ空けるスペース*/
+}
+
+main h1 {
+    display: inline-block;
+	font-size: 1.7rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	margin-bottom: 0px;	/*下に空けるスペース*/
+    letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる設定*/
+	text-align: left;	
+}
+/*ブロック内のh2タグ*/
+main h2 {
+    display: inline-block;
+	font-size: 1.6rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	margin-bottom: 0px;	/*下に空けるスペース*/
+    letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる設定*/
+    border-bottom: 3px solid #f3d110;	/*下線の幅、線種、色*/
+}
+
+/*ブロック内のh3タグ*/
+main h3 {
+	font-size: 1.4rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	margin-bottom: 40px;	/*下に空けるスペース*/
+}
+
+/*mainブロックのpタグ*/
+main p {
+	margin-bottom: 20px;	/*下へ空けるスペース*/
+	display: flex;
+}
+
+/*細々微調整*/
+h2 + h3, h2 + p, h3 + p {
+    margin-top: 0px;
+}
+
+
+
+

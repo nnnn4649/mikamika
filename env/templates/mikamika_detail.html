@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>{{ mikamika.store }}</p>
+<p>{{ mikamika.hyouka }}</p>
+<p>{{ mikamika.bikou }}</p><!-- 追加 -->
+<a href="{% url 'mikamika:mikamika_delete' mikamika.pk %}">削除</a> <!-- 追加 -->
+<a href="{% url 'mikamika:index' %}">戻る</a>
+</body>
+</html>
