@@ -18,5 +18,6 @@ class InquiryForm(forms.Form):
                             body=inquiry,
                             from_email=email,
                             to=["nakagawa.nihonest@gmail.com"],
-                            cc=[email])
+                            cc=[""],
+                            reply_to=[email])
     message.send()

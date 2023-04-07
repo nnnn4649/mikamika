@@ -27,13 +27,13 @@ def Index(request):
     akstore  = Mikamika.objects.distinct().values_list("store",flat=True).filter(todou='2')
     
     setatstore = set(atstore)
-    tstore = random.sample(setatstore,3)
+    tstore = random.sample(setatstore,10)
 
     setaostore = set(aostore)
-    ostore = random.sample(setaostore,3)
+    ostore = random.sample(setaostore,10)
 
     setakstore = set(akstore)
-    kstore = random.sample(setakstore,3)
+    kstore = random.sample(setakstore,10)
 
     context = {'tstore'  : tstore,
                'ostore'  : ostore,

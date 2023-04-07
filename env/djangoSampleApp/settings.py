@@ -65,7 +65,14 @@ ACCOUNT_USERNAME_REQUIRED = True # サインアップ（ユーザー登録）の
 ACCOUNT_EMAIL_REQUIRED = True # サインアップ（ユーザー登録）の時にメールアドレスを尋ねる
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # メール検証を必須とする
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nakagawa.nihonest@gmail.com'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # send_mailのfromがNoneの場合自動で入る。
+EMAIL_HOST_PASSWORD = 'gjfsauvixxruzwcv'
+
 
 LOGIN_URL = '/accounts/login/' # ログインURLの設定
 LOGIN_REDIRECT_URL = '/index/' # ログイン後のリダイレクト先

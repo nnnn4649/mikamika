@@ -5,8 +5,11 @@
 <meta charset="UTF-8">
 <title>ミカミカ-味覚マッチング</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ここにサイト説明を入れます">
+<meta name="description" content="有名店・行列店の評価があんまりだった経験ありませんか？そのSOSO評価の気持ちと同じ方がいるかもしれません">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<meta name="google-site-verification" content="wQYDezk6Lg4b2dsyhailyuknM3wm9YidI35qADunFFU" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430120167891352"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,12 +36,25 @@
 
 <a><img src="/static/mikamika/soso3.png" alt="" width="600" height="50" style="margin-top:40px"></a>
 <main>
-<center><h2>【 行列・有名店 】</h2></center>
+<center><h2>【 行列&有名店 】</h2></center>
 <p></p>
 <center><h2>下記店に行かれてsosoだった店はありますか？</h2></center>
 </main>
-
+<p><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 <a href="{% url 'mikamika:index' %}">別の店を表示はこちら</a>
+
+<!--<img src="https://scontent-itm1-1.cdninstagram.com/v/t51.29350-15/311987206_1126409378260385_9144016516851267345_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=ZtTBM224WeoAX9uAz5B&_nc_oc=AQnZkVpVxjWRZu8VsHGp-Bv2hDMWMF2HddzVm9aBEou_oExfyx5rOd1LT23rB8prdY8&_nc_ht=scontent-itm1-1.cdninstagram.com&edm=APCawUEEAAAA&oh=00_AfB_acE9yBOpPskLUn8W6mZrpXzb-jpOHh0emLWFDoReTw&oe=636E802A"  width="300" height="50">-->
+<!--インスタテスト
+<script type="text/javascript" src="path/to/instafeed.min.js"></script>
+<div id="instafeed"></div>
+
+<script type="text/javascript">
+    var feed = new Instafeed({
+      accessToken: 'EAAQh9DhUBrYBADkADv0Qouy9wipyuNAD88tpqQGIpPl1xQhruPbx206rmf85CfkyaV5e6bQqjMrmO9UxfVpgDD0ZAu6ZAD3ZBl1DCrxZBS9EZABEc2iMTudZCOqK4tzK26g7JRcSp1oKjTxbbsskUMZA6mrIBZCPDUIbw6RPjxZCffJqBGr4SCZBaphTklPgrkrS8ZD'
+    });
+    feed.run();
+</script>
+-->
 
 <div class="todou-box">
   <div class="todou-item">
@@ -47,28 +63,32 @@
   <h2 style="background-color:whitesmoke"> 東 京 </h2>
   <p></p>
   {% for mtstore in tstore %}
-  <p><img src="/static/mikamika/ramen.jpeg" alt="" width="300" height="50"></p>
-  <a href="{% url 'mikamika:mikamika_create0' '東京' mtstore %}">{{ mtstore }}</a>
+  <!--<p><img src="/static/mikamika/ramen.jpeg" alt="" width="300" height="50"></p>-->
+  <p><a href="{% url 'mikamika:mikamika_create0' '東京' mtstore %}">{{ mtstore }}</a></p>
   {% endfor %}
   </div>
 <div class="todou-item">
 <h2 style="background-color:whitesmoke"> 大 阪 </h2>
 <p></p> 
 {% for mostore in ostore %}
- <p><img src="/static/mikamika/teisyoku.jpeg" alt="" width="300" height="50"></p>
- <a href="{% url 'mikamika:mikamika_create0' '大阪' mostore %}">{{ mostore }}</a>
+ <!--<p><img src="/static/mikamika/teisyoku.jpeg" alt="" width="300" height="50"></p>-->
+ <p><a href="{% url 'mikamika:mikamika_create0' '大阪' mostore %}">{{ mostore }}</a></p>
  {% endfor %}
 </div>
 <div class="todou-item">
 <h2 style="background-color:whitesmoke"> 京 都 </h2>
 <p></p>
 {% for mkstore in kstore %}
-<p><img src="/static/mikamika/yakiniku.png" alt="" width="300" height="50"></p>
-<a href="{% url 'mikamika:mikamika_create0' '京都' mkstore %}">{{ mkstore }}</a>
+<!--<p><img src="/static/mikamika/yakiniku.png" alt="" width="300" height="50"></p>-->
+<p><a href="{% url 'mikamika:mikamika_create0' '京都' mkstore %}">{{ mkstore }}</a></p>
 {% endfor %}
 </div>
 </div>
 </form>
+
+<a href="https://px.a8.net/svt/ejp?a8mat=3NNCX8+9W18J6+4XDU+5ZU29" rel="nofollow">
+  <img border="0" width="468" height="60" alt="" src="https://www27.a8.net/svt/bgt?aid=221119532598&wid=001&eno=01&mid=s00000022989001007000&mc=1"></a>
+  <img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=3NNCX8+9W18J6+4XDU+5ZU29" alt="">
 
 </body>
 </html>
