@@ -20,6 +20,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 #sys.path.append('/home/ec2-user/mikamika-1/env/djangoSampleApp')   #### 追加 ####
 #sys.path.append('/home/ec2-user/mikamika-1/env/djangoSampleApp/wsgi.py')   #### 追加 ####
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoSampleApp.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoSampleApp.settings.local')
 
 application = get_wsgi_application()
