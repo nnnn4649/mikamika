@@ -163,3 +163,11 @@ CHANNEL_LAYERS = {
         'CONFIG': { 'hosts': [('127.0.0.1', 6379)], }, #127.0.0.1
     },
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nakagawa.nihonest@gmail.com'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # send_mailのfromがNoneの場合自動で入る。
+EMAIL_HOST_PASSWORD = 'gjfsauvixxruzwcv'
