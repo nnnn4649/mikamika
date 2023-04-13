@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-c8t*cc%#t9a)stiade^&j47n&sw&x1_0r5!^+_fgg6ll15%92&'
 
-#DEBUG = False
+DEBUG = False
 
 #ALLOWED_HOSTS = ["mikamika.tk"]
 
@@ -168,6 +168,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'nakagawa.nihonest@gmail.com'
+#EMAIL_HOST_USER = 'nakagawa.nihonest@gmail.com'
 #DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # send_mailのfromがNoneの場合自動で入る。
 EMAIL_HOST_PASSWORD = 'gjfsauvixxruzwcv'
