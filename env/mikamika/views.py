@@ -18,6 +18,10 @@ from django.contrib.auth.decorators import login_required
 from collections import Counter
 import re
 from accounts.models import CustomUser
+from .models import UserInfo
+from .models import Comment
+from .forms import CommentForm
+
 
 def Index(request):
     template_name = 'index.html'
@@ -409,6 +413,40 @@ def  mikamika_user(request):
          mimage = Mikamika.objects.values_list("image",flat=True).filter(create_user=mflag).order_by("image").last()
          mage = CustomUser.objects.get(username='nnnn4649')
 
+         usstore = UserInfo.objects.values_list("userstore","todou").filter(create_user=mflag)
+
+         usstore2 = usstore[0][0]
+         ustodou  = usstore[0][1]   
+
+         
+         if   ustodou == '0':
+              ustodou2 = '東京'
+         elif ustodou == '1':
+              ustodou2 = '大阪'
+         elif ustodou == '2':
+              ustodou2 = '京都' 
+
+         if  request.method == 'POST':
+             commet1 = CommentForm(request.POST) 
+             if commet1.is_valid():
+                commet2 = commet1.cleaned_data["commet"]
+            # commet1 = CommentForm(request.POST['commet']) 
+
+             #if  comment.is_valid():
+            #     comment.create_user = request.user.username
+            #     comment.target = usstore2 
+             comment = Comment(create_user=request.user,target_id=usstore2,commet=commet2)
+             comment.save()
+        
+         comment_list = Comment.objects.filter(target=usstore2).order_by('-created_at') #Comment.objects.all()
+         comecount = len(comment_list)
+
+
+              # mikamika.create_user=self.request.user
+              # mikamika.save()
+              # return super().form_valid(form)
+              # return redirect('http://127.0.0.1:8000/mikamika/user/')
+
      context = {'gcount'    :  gcount,
                 'scount'    :  scount,
                 'matti'     :  matti,
@@ -422,7 +460,14 @@ def  mikamika_user(request):
                  'nugtodou3' :  nugtodou3,
                  'uimage' : uimage,
                  'mimage' : mimage,
-                  'mage' : mage,}
+                  'mage' : mage,
+                  'usstore' : usstore,
+                  'usstore2' : usstore2,
+                  'ustodou' : ustodou,
+                  'ustodou2' : ustodou2,
+                  'comment_form' : CommentForm(),#{"create_user" : request.user}
+                  'comment_list' : comment_list,
+                  'comecount' : comecount,}
      return render(request, template_name , context)
 
 @login_required
@@ -617,3 +662,24 @@ class InquiriesView(generic.FormView):
  def form_valid(self,form):
    form.send_email()
    return super().form_valid(form) 
+ 
+
+class CommentView(CreateView):
+      model = Comment
+      form_class = CommentForm
+     # comment_list = Comment.objects.all()
+      success_url = reverse_lazy('mikamika:mikamika_user')
+
+      def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_list'] = '100'
+        return context
+      #def form_valid(self, form):
+     #   post_pk = self.kwargs.get('pk')
+     #   post = get_object_or_404(Comment, pk=post_pk)
+
+     #   comment = form.save(commit=False)
+     #   comment.target = post
+     #   comment.save()
+
+      #  return redirect('mikamika:mikamika_comment', pk=post_pk)

@@ -1,5 +1,6 @@
 from django import forms
 from .models import Mikamika
+from .models import Comment
 
 
 class MikamikaForm(forms.ModelForm):
@@ -25,4 +26,11 @@ class MikamikaUploadForm(forms.ModelForm):
     class Meta:
         model = Mikamika
         fields = ['image','create_user']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['commet']
         
+    
