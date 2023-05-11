@@ -34,7 +34,7 @@ def Index(request):
     tstore = random.sample(setatstore,10)
 
     setaostore = set(aostore)
-    ostore = random.sample(setaostore,10)
+    ostore = random.sample(setaostore,9)
 
     setakstore = set(akstore)
     kstore = random.sample(setakstore,10)

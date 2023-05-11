@@ -68,9 +68,10 @@
 <div class="todou-item">
 <h2 style="background-color:whitesmoke"> 大 阪 </h2>
 <p></p> 
+<p><a href="{% url 'mikamika:mikamika_testcreate' '大阪' '花くじら' %}">花くじら</a></p>
 {% for mostore in ostore %}
 {% if mostore == '花くじら'%}
-<p><a href="{% url 'mikamika:mikamika_testcreate' '大阪' mostore %}">{{ mostore }}</a></p>
+<!--<p><a href="{% url 'mikamika:mikamika_testcreate' '大阪' mostore %}">{{ mostore }}</a></p>-->
 {% else %}
  <!--<p><img src="/static/mikamika/teisyoku.jpeg" alt="" width="300" height="50"></p>-->
  <p><a href="{% url 'mikamika:mikamika_create0' '大阪' mostore %}">{{ mostore }}</a></p>
