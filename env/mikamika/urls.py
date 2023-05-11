@@ -23,4 +23,5 @@ urlpatterns = [
     path('mikamika/create4/', views.mikamika_create4, name='mikamika_create4'),
     path('mikamika/inquiry/', views.InquiriesView.as_view(), name='inquiry'),
     path('mikamika/comment/', views.CommentView.as_view(), name='mikamika_comment'),
+    path('mikamika/testcreate/<mttdou>/<mtstore>/', views.mikamika_testcreate, name='mikamika_testcreate'),#新
 ]

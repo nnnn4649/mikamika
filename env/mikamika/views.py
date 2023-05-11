@@ -683,3 +683,54 @@ class CommentView(CreateView):
      #   comment.save()
 
       #  return redirect('mikamika:mikamika_comment', pk=post_pk)
+
+def mikamika_testcreate(request,mttdou,mtstore):
+    template_name = 'tfa.html'
+    
+    ttdou  = mttdou
+    tstore = mtstore
+    tsflag = mtstore
+    
+    if   ttdou == '東京':
+         tdflag = '0'
+    elif ttdou == '大阪':
+         tdflag = '1'
+    elif ttdou == '京都':
+         tdflag = '2'
+
+    mtuflag  = Mikamika.objects.values_list("create_user").filter(store=tsflag,todou=tdflag).exclude(create_user=9)
+    setmtuflag = set(mtuflag)
+
+    lenflag = len(setmtuflag)
+
+    if  lenflag >=   1:
+        stuflag = random.sample(setmtuflag,k=1)
+        tuflag = stuflag[0]
+
+        tstoretodou = Mikamika.objects.values_list("store","todou").filter(hyouka='1',create_user=tuflag).exclude(store=tstore).order_by('?').first()
+
+        if tstoretodou == None:
+           tgstore = '未登録'
+           tgtdou  = '未登録'
+        else:
+           tgstore = tstoretodou[0]
+           tgtdou  = tstoretodou[1]
+
+           if   tgtdou == '0':
+                tgtdou = '東京'
+           elif tgtdou == '1':
+                tgtdou = '大阪'
+           elif tgtdou == '2':
+                tgtdou = '京都' 
+
+    else:
+          tgstore = '未登録'
+          tgtdou  = '未登録'
+          
+    context = {'tstore'    : tstore,
+               'tgstore'   : tgstore,
+               'ttdou'     : ttdou,
+         #      'lenflag'     :lenflag,
+               'tgtdou'    : tgtdou,}
+
+    return render(request, template_name , context)
